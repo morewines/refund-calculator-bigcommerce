@@ -1,0 +1,25 @@
+{
+  "name": "refund-calculator-bigcommerce",
+  "version": "1.0.0",
+  "description": "Internal Tool to Calculate Partial Refunds",
+  "engines": {
+    "node": "7.x"
+  },
+  "scripts": {
+    "start": "node server",
+    "heroku-postbuild": "cd react-ui/ && npm install --only=dev && npm install && npm run build"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "react-ui/node_modules"
+  ],
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/morewines/refund-calculator-bigcommerce.git"
+  },
+  "license": "MIT",
+  "devDependencies": {}
+}
