@@ -4,11 +4,6 @@
   border-color: #b83821;
 }
 
-.button-mw:hover {
-  background-color: #5b5c63;
-  border-color: #5b5c63;
-}
-
 /* Larger than mobile screen */
 @media (min-width: 40.0rem) {
 

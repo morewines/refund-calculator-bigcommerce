@@ -1,15 +1,33 @@
 /* Base style */
 .wrapper {
-    display: block;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
+  overflow: hidden;
+    /*position: relative;*/
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .wrapper > .container {
   padding-top: 7.5rem;
   padding-bottom: 7.5rem;
+}
+
+.main-wrapper {
+  flex: 1 0 auto;
+}
+
+a {
+  color: #b83821;
+}
+
+input[type='text']:focus {
+  border-color: #b83821;
+}
+
+input[type='submit'] {
+  background-color: #b83821;
+  border-color: #b83821;
 }
 
 /* Larger than mobile screen */

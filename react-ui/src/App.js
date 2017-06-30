@@ -5,6 +5,7 @@ import './App.css';
 import Button from './components/Button/Button';
 import Nav from './components/Nav/Nav';
 import AccessForm from './components/AccessForm/AccessForm';
+import Footer from './components/Footer/Footer';
 
 
 class App extends Component {
@@ -17,10 +18,17 @@ class App extends Component {
   }
 
   render() {
+    const { isAllowed } = this.state;
+
     return (
       <div className="wrapper">
-        <Nav />
-        <AccessForm />
+        <header>
+          <Nav />
+        </header>
+        <main className="main-wrapper">
+          {isAllowed ? 'test' : <AccessForm />}
+        </main>
+        <Footer />
       </div>
     )
   }
