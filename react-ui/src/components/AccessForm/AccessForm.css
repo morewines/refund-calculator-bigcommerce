@@ -1,0 +1,16 @@
+.access-form-wrapper {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+#access-btn {
+  /*margin: 0 auto;*/
+  /*text-align: center;*/
+}
+
+.access-form-container-wrapper {
+  position: absolute;
+  top: calc(50% + 52px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

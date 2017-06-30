@@ -1,15 +1,12 @@
 /* Base style */
-.wrapper {
-    display: block;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
+.button-mw {
+  background-color: #b83821;
+  border-color: #b83821;
 }
 
-.wrapper > .container {
-  padding-top: 7.5rem;
-  padding-bottom: 7.5rem;
+.button-mw:hover {
+  background-color: #5b5c63;
+  border-color: #5b5c63;
 }
 
 /* Larger than mobile screen */

@@ -13,3 +13,4 @@ build
 .DS_Store
 .env
 npm-debug.log
+milligram-1.3.0
