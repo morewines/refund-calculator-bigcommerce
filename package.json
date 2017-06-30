@@ -6,7 +6,7 @@
     "node": "7.x"
   },
   "scripts": {
-    "start": "node server",
+    "start": "node api/server",
     "heroku-postbuild": "cd react-ui/ && npm install --only=dev && npm install && npm run build"
   },
   "cacheDirectories": [
