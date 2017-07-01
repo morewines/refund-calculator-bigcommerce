@@ -1,0 +1,26 @@
+/* Base style */
+
+/* Larger than mobile screen */
+@media (min-width: 40.0rem) {
+  .search-wrap {
+    max-width: 40em;
+    margin: 0 auto;
+  }
+
+  .calc-column-wrap {
+    /*border: .1rem solid #b83821;*/
+    /*border-radius: .4rem;*/
+    background-color: rgba(184, 56, 33, .075);
+    /*min-height: 30em;*/
+  }
+}
+
+/* Larger than tablet screen */
+@media (min-width: 80.0rem) {
+
+}
+
+/* Larger than desktop screen */
+@media (min-width: 120.0rem) {
+
+}

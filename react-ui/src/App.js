@@ -49,16 +49,8 @@ class App extends Component {
         </header>
 
         <main className="main-wrapper">
-          {
-            isAllowedAccess ? <Calculator /> : (
-              <AccessForm
-                accessValue={accessValue}
-                handleAccessSubmit={this.handleAccessSubmit}
-                handleAccessChange={this.handleAccessChange}
-              />
-            )
-          }
-          <div className="container">
+
+          <div className="container clearfix">
             <Button
               extraClass="float-right"
               buttonText="Start Over"
@@ -70,6 +62,16 @@ class App extends Component {
               }
             />
           </div>
+
+          {
+            isAllowedAccess ? <Calculator /> : (
+              <AccessForm
+                accessValue={accessValue}
+                handleAccessSubmit={this.handleAccessSubmit}
+                handleAccessChange={this.handleAccessChange}
+              />
+            )
+          }
         </main>
 
 
