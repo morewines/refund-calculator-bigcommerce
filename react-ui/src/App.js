@@ -8,6 +8,7 @@ import Button from './components/Button/Button';
 import Nav from './components/Nav/Nav';
 import AccessForm from './components/AccessForm/AccessForm';
 import Footer from './components/Footer/Footer';
+import Calculator from './components/Calculator/Calculator';
 import FaRefresh from 'react-icons/lib/fa/refresh';
 
 
@@ -49,7 +50,7 @@ class App extends Component {
 
         <main className="main-wrapper">
           {
-            isAllowedAccess ? '' : (
+            isAllowedAccess ? <Calculator /> : (
               <AccessForm
                 accessValue={accessValue}
                 handleAccessSubmit={this.handleAccessSubmit}
