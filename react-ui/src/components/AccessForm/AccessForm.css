@@ -1,11 +1,7 @@
 .access-form-wrapper {
   max-width: 40rem;
   margin: 0 auto;
-}
-
-#access-btn {
-  /*margin: 0 auto;*/
-  /*text-align: center;*/
+  text-align: center;
 }
 
 .access-form-container-wrapper {

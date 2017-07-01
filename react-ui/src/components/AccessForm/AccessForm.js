@@ -1,9 +1,10 @@
 import React from 'react';
+import SignIn from 'react-icons/lib/fa/sign-in';
 
 //CSS
 import './AccessForm.css';
 
-const AccessForm = ({}) => {
+const AccessForm = ({accessValue, handleAccessChange, handleAccessSubmit}) => {
 
   const typeOne = (
     <div className="row">
@@ -20,22 +21,27 @@ const AccessForm = ({}) => {
 
   const typeTwo = (
     <div>
-      <label htmlFor="nameField">Access #</label>
-      <input type="text" placeholder="..." id="nameField" />
-      <label htmlFor="commentField">Get Access</label>
-      <input className="button-primary button-mw" type="submit" value="Send" />
+
+      <input type="text" placeholder="Access #"
+        id="nameField"
+        value={accessValue}
+        onChange={handleAccessChange}
+      />
+
+      <button className="button-primary button-mw" type="submit">
+        <SignIn size={18} style={{
+          marginBottom: '3px',
+          marginRight: '1em'
+        }} />
+        Get Access
+      </button>
+
     </div>
   )
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    console.log('submitted')
-  }
-
-
   return (
     <div className="container access-form-container-wrapper">
-      <form className="access-form-wrapper" onSubmit={handleSubmit}>
+      <form className="access-form-wrapper" onSubmit={handleAccessSubmit}>
         <fieldset>
           {typeTwo}
         </fieldset>

@@ -3,10 +3,13 @@ import React from 'react';
 //CSS
 import './Button.css';
 
-const Button = ({buttonText}) => {
+const Button = ({icon, buttonText, extraClass}) => {
 
   return (
-    <a className="button button-mw">{buttonText}</a>
+    <a className={"button button-mw " + extraClass}>
+      {icon}
+      {buttonText}
+    </a>
   )
 }
 
