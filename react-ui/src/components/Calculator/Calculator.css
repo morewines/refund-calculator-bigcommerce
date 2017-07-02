@@ -1,11 +1,11 @@
 /* Base style */
+.search-wrap {
+  max-width: 40em;
+  margin: 3.5em auto;
+}
 
 /* Larger than mobile screen */
 @media (min-width: 40.0rem) {
-  .search-wrap {
-    max-width: 40em;
-    margin: 0 auto;
-  }
 
   .calc-column-wrap {
     /*border: .1rem solid #b83821;*/

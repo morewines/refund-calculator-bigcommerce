@@ -4,19 +4,17 @@ import React, { Component } from 'react';
 import './App.css';
 
 //Modules
-import Button from './components/Button/Button';
 import Nav from './components/Nav/Nav';
 import AccessForm from './components/AccessForm/AccessForm';
 import Footer from './components/Footer/Footer';
 import Calculator from './components/Calculator/Calculator';
-import FaRefresh from 'react-icons/lib/fa/refresh';
-
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       accessValue: '',
+      accessPlaceholder: 'Access #',
       isAllowedAccess: false,
       message: null
     };
@@ -28,18 +26,28 @@ class App extends Component {
     this.setState({
       accessValue: evt.target.value
     })
+
   }
 
   handleAccessSubmit(evt) {
     evt.preventDefault();
-    console.log(this.state.accessValue)
-    this.setState({
-      isAllowedAccess: true
-    })
+    const accessKey = process.env.REACT_APP_ACCESS_KEY;
+
+    if (this.state.accessValue !== accessKey) {
+      this.setState({
+        accessValue: '',
+        accessPlaceholder: 'Please enter a valid access #'
+      })
+    }
+    else {
+      this.setState({
+        isAllowedAccess: true
+      })
+    }
   }
 
   render() {
-    const { isAllowedAccess, accessValue } = this.state;
+    const { isAllowedAccess, accessValue, accessPlaceholder } = this.state;
 
     return (
       <div className="wrapper">
@@ -49,33 +57,17 @@ class App extends Component {
         </header>
 
         <main className="main-wrapper">
-
-          <div className="container clearfix">
-            <Button
-              extraClass="float-right"
-              buttonText="Start Over"
-              icon={
-                <FaRefresh size={18} style={{
-                  marginBottom: '3px',
-                  marginRight: '1em'
-                }}/>
-              }
+          {isAllowedAccess ? (
+            <Calculator accessValue={accessValue} />
+            ) : (
+            <AccessForm
+              accessValue={accessValue}
+              accessPlaceholder={accessPlaceholder}
+              handleAccessSubmit={this.handleAccessSubmit}
+              handleAccessChange={this.handleAccessChange}
             />
-          </div>
-
-          {
-            isAllowedAccess ? <Calculator /> : (
-              <AccessForm
-                accessValue={accessValue}
-                handleAccessSubmit={this.handleAccessSubmit}
-                handleAccessChange={this.handleAccessChange}
-              />
-            )
-          }
+          )}
         </main>
-
-
-
 
         <Footer />
       </div>

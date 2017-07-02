@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import request from 'request';
+import SuperAgent from 'superagent';
 
 //CSS
 import './Calculator.css';
 
 //Modules
 import Search from '../Search/Search';
+import Button from '../Button/Button';
+import FaRefresh from 'react-icons/lib/fa/refresh';
 
 class Calculator extends Component {
   constructor() {
@@ -20,13 +22,19 @@ class Calculator extends Component {
   }
 
   getOrder(searchValue) {
-    request.get(`/api/orders/${searchValue}`)
+    SuperAgent
+      .get(`/api/orders/${searchValue}`)
+      .query({ accessValue: this.props.accessValue })
       .end( (err, res) => {
         if (err || !res.ok) {
           console.log(res.body);
         }
         else {
-          console.log(res.body);
+          this.setState({
+            searchValue: '',
+            orderData: res.body.assembledOrder
+          })
+          console.log(this.state);
         }
       })
   }
@@ -59,7 +67,16 @@ class Calculator extends Component {
         <div className="row">
           <div className="column">
             <div className="calc-column-wrap">
-
+              <Button
+                extraClass=""
+                buttonText="Start Over"
+                icon={
+                  <FaRefresh size={18} style={{
+                    marginBottom: '3px',
+                    marginRight: '1em'
+                  }}/>
+                }
+              />
             </div>
           </div>
           <div className="column">
