@@ -10,7 +10,8 @@ function order(orderData, callback) {
     subtotal_ex_tax,
     total_tax,
     total_inc_tax,
-    products
+    products,
+    shipping_cost_inc_tax
   } = orderData;
 
   //assemble important info
@@ -26,7 +27,8 @@ function order(orderData, callback) {
     },
     subtotal_ex_tax,
     total_tax,
-    total_inc_tax
+    total_inc_tax,
+    shipping_cost_inc_tax
   };
 
   //add coupon code if exist
@@ -36,14 +38,15 @@ function order(orderData, callback) {
 
   //assemble products array info
   assembleProducts(products, (assembledProducts) => {
-    console.log(assembledProducts);
-    callback(orderData)
+    //replace assembled products array to rest of order
+    assembledOrder.products = assembledProducts;
+    //send order info back
+    callback(assembledOrder);
   })
 }
 
 function assembleProducts(products, callback) {
   let assembledProducts = [];
-  console.log(products);
   for (let i = 0; i < products.length; i++) {
 
     const {
