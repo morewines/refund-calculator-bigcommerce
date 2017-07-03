@@ -14,7 +14,8 @@ class Calculator extends Component {
     super();
     this.state = {
       searchValue: '',
-      fetching: null,
+      searchPlaceholder: 'Order #',
+      fetching: false,
       orderData: null
     }
     this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -32,7 +33,9 @@ class Calculator extends Component {
         else {
           this.setState({
             searchValue: '',
-            orderData: res.body.assembledOrder
+            searchPlaceholder: 'Order #',
+            orderData: res.body.assembledOrder,
+            fetching: false
           })
           console.log(this.state);
         }
@@ -47,12 +50,21 @@ class Calculator extends Component {
 
   handleSearchSubmit(evt) {
     evt.preventDefault();
-    this.getOrder(this.state.searchValue);
+    if (this.state.searchValue.length > 0) {
+      this.setState({
+        fetching: true
+      })
+      this.getOrder(this.state.searchValue);
+    }
+    else {
+      this.setState({
+        searchPlaceholder: 'Please enter Order #'
+      })
+    }
   }
 
   render() {
-
-    const { searchValue } = this.state;
+    const { searchValue, fetching, searchPlaceholder } = this.state;
 
     return (
       <div className="container clearfix">
@@ -61,22 +73,24 @@ class Calculator extends Component {
             searchValue={searchValue}
             handleSearchChange={this.handleSearchChange}
             handleSearchSubmit={this.handleSearchSubmit}
+            fetching={fetching}
+            searchPlaceholder={searchPlaceholder}
           />
         </div>
 
         <div className="row">
           <div className="column">
             <div className="calc-column-wrap">
-              <Button
-                extraClass=""
-                buttonText="Start Over"
-                icon={
-                  <FaRefresh size={18} style={{
-                    marginBottom: '3px',
-                    marginRight: '1em'
-                  }}/>
-                }
-              />
+                <Button
+                  extraClass=""
+                  buttonText="Start Over"
+                  icon={
+                    <FaRefresh size={18} className="fa-spin" style={{
+                      marginBottom: '3px',
+                      marginRight: '1em'
+                    }}/>
+                  }
+                />
             </div>
           </div>
           <div className="column">

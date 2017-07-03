@@ -1,4 +1,24 @@
 /* Base style */
+.spinner {
+  -webkit-animation:spin 1.25s linear infinite;
+  -moz-animation:spin 1.25s linear infinite;
+  animation:spin 1.25s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.fetching-button {
+  background-color: #606c76;
+  border-color: #606c76;
+}
+
+.fetching-button:hover {
+  background-color: #606c76 !important;
+  border-color: #606c76 !important;
+  cursor: not-allowed;
+}
 
 /* Larger than mobile screen */
 @media (min-width: 40.0rem) {

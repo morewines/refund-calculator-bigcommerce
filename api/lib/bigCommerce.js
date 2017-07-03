@@ -89,18 +89,18 @@ function populateSku(productArr, callback) {
   skuGrabber(0, productArr, (updatedProductsArr) => {
     callback(updatedProductsArr)
   })
-
 }
 
 function skuGrabber(i, productArr, callback) {
-  console.log('skuGrabber', productArr);
   if (i < productArr.length) {
     let sku = productArr[i].sku;
     let skuUrl = `${BC_PATH_V3}/catalog/products?sku=${sku}`;
+
     //urls for products are stored in a different bc api call
     populateOrder(skuUrl, (skuData) => {
       //extract sku url
       productArr[i].url = skuData.data[0].custom_url.url;
+
       //recursively call again
       skuGrabber(i+1, productArr, callback);
     })
@@ -109,7 +109,6 @@ function skuGrabber(i, productArr, callback) {
     callback(productArr);
   }
 }
-
 
 module.exports = {
   findOrder

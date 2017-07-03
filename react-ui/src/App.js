@@ -16,7 +16,8 @@ class App extends Component {
       accessValue: '',
       accessPlaceholder: 'Access #',
       isAllowedAccess: false,
-      message: null
+      message: null,
+      fetching: false
     };
     this.handleAccessChange = this.handleAccessChange.bind(this);
     this.handleAccessSubmit = this.handleAccessSubmit.bind(this);
@@ -47,7 +48,10 @@ class App extends Component {
   }
 
   render() {
-    const { isAllowedAccess, accessValue, accessPlaceholder } = this.state;
+    const {
+      isAllowedAccess,
+      accessValue,
+      accessPlaceholder } = this.state;
 
     return (
       <div className="wrapper">
@@ -68,7 +72,6 @@ class App extends Component {
             />
           )}
         </main>
-
         <Footer />
       </div>
     )
