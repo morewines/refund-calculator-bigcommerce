@@ -7,6 +7,7 @@ import './Calculator.css';
 //Modules
 import Search from '../Search/Search';
 import Button from '../Button/Button';
+import Loader from '../Loader/Loader';
 import FaRefresh from 'react-icons/lib/fa/refresh';
 
 class Calculator extends Component {
@@ -58,13 +59,25 @@ class Calculator extends Component {
     }
     else {
       this.setState({
-        searchPlaceholder: 'Please enter Order #'
+        searchPlaceholder: 'Order # required'
       })
     }
   }
 
   render() {
     const { searchValue, fetching, searchPlaceholder } = this.state;
+
+             /**       <Button
+                  extraClass=""
+                  buttonText="Start Over"
+                  icon={
+                    <FaRefresh size={18} className="fa-spin" style={{
+                      marginBottom: '3px',
+                      marginRight: '1em'
+                    }}/>
+                  }
+                />
+                **/
 
     return (
       <div className="container clearfix">
@@ -81,23 +94,15 @@ class Calculator extends Component {
         <div className="row">
           <div className="column">
             <div className="calc-column-wrap">
-                <Button
-                  extraClass=""
-                  buttonText="Start Over"
-                  icon={
-                    <FaRefresh size={18} className="fa-spin" style={{
-                      marginBottom: '3px',
-                      marginRight: '1em'
-                    }}/>
-                  }
-                />
+                {fetching ? <Loader extraClass="load-left"/> : ''}
             </div>
           </div>
           <div className="column">
             <div className="calc-column-wrap">
-
+                {fetching ? <Loader extraClass="load-right"/> : ''}
             </div>
           </div>
+
         </div>
       </div>
     )

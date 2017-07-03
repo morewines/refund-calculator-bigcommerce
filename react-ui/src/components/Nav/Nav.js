@@ -7,7 +7,7 @@ const Nav = () => {
   return (
     <div className="nav-wrapper">
       <div className="container">
-        <h4 className="logo">Partial Refund Calculator (BigCommerce)</h4>
+        <h4 className="logo">BC Partial Refund</h4>
       </div>
     </div>
   )

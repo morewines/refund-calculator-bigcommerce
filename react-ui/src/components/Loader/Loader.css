@@ -1,3 +1,11 @@
+.load-right {
+  left: 75% !important;
+}
+
+.load-left {
+  left: 25% !important;
+}
+
 /* Loader written by brunjo @ https://codepen.io/brunjo/details/wBKmbm/ */
 .loading {
   position: absolute;
@@ -10,21 +18,20 @@
   height: 18px;
   border-radius: 4px;
   animation: loading 1s ease-in-out infinite;
+  margin: 0 .08em;
+  background-color: #606c76;
+  opacity: .5;
 }
 .loading-bar:nth-child(1) {
-  background-color: #b83821;
   animation-delay: 0;
 }
 .loading-bar:nth-child(2) {
-  background-color: #b83821;
   animation-delay: 0.09s;
 }
 .loading-bar:nth-child(3) {
-  background-color: #b83821;
   animation-delay: .18s;
 }
 .loading-bar:nth-child(4) {
-  background-color: #b83821;
   animation-delay: .27s;
 }
 

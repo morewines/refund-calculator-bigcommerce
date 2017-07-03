@@ -1,7 +1,8 @@
 /* Base style */
 .search-wrap {
   max-width: 40em;
-  margin: 3.5em auto;
+  margin: 2em auto;
+  height: 3.8rem;
 }
 
 /* Larger than mobile screen */
@@ -10,14 +11,22 @@
   .calc-column-wrap {
     /*border: .1rem solid #b83821;*/
     /*border-radius: .4rem;*/
-    background-color: rgba(184, 56, 33, .075);
-    /*min-height: 30em;*/
+    /*background-color: rgba(184, 56, 33, .075);*/
+    min-height: 30em;
   }
+
+  .search-wrap {
+    margin: 3em auto;
+  }
+
 }
 
 /* Larger than tablet screen */
 @media (min-width: 80.0rem) {
 
+  .search-wrap {
+    margin: 3.5em auto;
+  }
 }
 
 /* Larger than desktop screen */
