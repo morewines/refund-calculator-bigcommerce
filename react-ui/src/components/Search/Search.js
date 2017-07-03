@@ -27,7 +27,7 @@ const Search = (
                 marginBottom: '3px',
                 marginRight: '1em'
               }}/>
-              Loading ...
+              Loading....
             </button>
           ) : (
             <button className="button-primary button-mw float-right"
