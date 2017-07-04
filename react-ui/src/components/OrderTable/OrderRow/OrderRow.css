@@ -1,3 +1,29 @@
+.truncate {
+  /*display: table;*/
+  /*table-layout: fixed;*/
+  /*width: 100%;*/
+  position: relative;
+}
+
+.truncated {
+  position: absolute;
+  max-width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spacer {
+  height: 0;
+  overflow: hidden;
+}
+
 .order-dollar {
   margin-left: .75rem;
 }
+
+.order-price {
+  padding-right: 1rem;
+  padding-left: 1.25rem;
+}
+

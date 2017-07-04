@@ -69,37 +69,37 @@ const OrderEdit = ({refundOrderData, handleEditClick}) => {
             </td>
             <td className="order-table-center">
               <div className="clearfix">
-                <span className="float-left order-dollar">$</span>
+                <span className="float-left order-dollar order-price">$</span>
                 <span className="float-right">
                   {format(subtotal_ex_tax)}
                 </span>
               </div>
               <div className="clearfix">
-                <span className="float-left order-dollar">$</span>
+                <span className="float-left order-dollar order-price">$</span>
                 <span className="float-right">
                   {format(coupon_discount)}
                 </span>
               </div>
               <div className="clearfix">
-                <span className="float-left order-dollar">$</span>
+                <span className="float-left order-dollar order-price">$</span>
                 <span className="float-right">
                   {format(shipping_cost_inc_tax)}
                 </span>
               </div>
               <div className="clearfix">
-                <span className="float-left order-dollar">$</span>
+                <span className="float-left order-dollar order-price">$</span>
                 <span className="float-right">
                   {format(total_tax)}
                 </span>
               </div>
               <div className="clearfix">
-                <div className="float-left order-dollar">$</div>
+                <div className="float-left order-dollar order-price">$</div>
                 <span className="float-right">
                   {format(refunded_amount)}
                 </span>
               </div>
               <div className="clearfix order-total">
-                <div className="float-left order-dollar"><b>$</b></div>
+                <div className="float-left order-dollar order-price"><b>$</b></div>
                 <span className="float-right">
                   <b>{format(grandTotal)}</b>
                 </span>

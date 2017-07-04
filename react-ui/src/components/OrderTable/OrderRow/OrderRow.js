@@ -11,11 +11,20 @@ const OrderRow = ({product}) => {
 
   return (
     <tr>
-      <td><a href={`https://morewines.com${url}`} target="_blank">{name}</a></td>
+      <td>
+        <div className="truncate">
+          <div className="truncated">
+            <a href={`https://morewines.com${url}`} target="_blank">{name}</a>
+          </div>
+          <div className="spacer">
+          </div>
+          <span>&nbsp;</span>
+        </div>
+      </td>
       <td className="order-table-center">{sku}</td>
       <td className="order-table-center">{format(weight)}lbs</td>
       <td className="order-table-center">{quantity}</td>
-      <td className="order-table-center">
+      <td className="order-table-center order-price">
         <span className="float-left order-dollar">$</span>
         <span className="float-right">{format(price_ex_tax)}</span>
       </td>

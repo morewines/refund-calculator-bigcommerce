@@ -20,10 +20,12 @@
 
   .table-currency {
     padding-left: 2.5rem;
+    min-width: 90px;
   }
 
   .order-table-item {
     width: 44%;
+    max-width: 44%
   }
 
   .order-total {

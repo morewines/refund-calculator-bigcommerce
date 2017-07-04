@@ -10,9 +10,9 @@ const MathButton = ({buttonText, handleMath}) => {
   }
 
   return (
-    <button className="math-button" onClick={handleClick}>
+    <a className="button math-button" onClick={handleClick}>
       {buttonText}
-    </button>
+    </a>
   )
 }
 

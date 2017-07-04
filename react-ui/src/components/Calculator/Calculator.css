@@ -59,12 +59,13 @@ tbody > tr:last-child > td {
   }
 
   .calc-column-wrap {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   th, td {
-    padding: 1rem .75rem;
+    padding: 1.2rem .75rem;
   }
+
 }
 
 /* Larger than desktop screen */

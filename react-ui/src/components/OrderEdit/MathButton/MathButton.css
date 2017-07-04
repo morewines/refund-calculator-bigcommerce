@@ -1,10 +1,16 @@
 .math-button {
   height: 100%;
-  line-height: 1.6rem;
-  padding: 0 2.5rem;
-  margin: 0 2rem 0 0;
-  font-size: .7rem;
+  line-height: 1.7rem;
+  padding: 0 1rem;
+  margin: 0 1rem 0 0;
+  font-size: 1.7rem;
   background-color: white;
-  border-color: #b83821;
-  color: black;
+  border-color: white;
+  color: grey;
+}
+
+.math-button:hover {
+  background-color: white;
+  color: #b83821;
+  border-color: white
 }
