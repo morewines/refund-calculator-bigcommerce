@@ -8,7 +8,7 @@ import './Calculator.css';
 import Search from '../Search/Search';
 import Button from '../Button/Button';
 import OrderTable from '../OrderTable/OrderTable';
-import FaRefresh from 'react-icons/lib/fa/refresh';
+// import FaRefresh from 'react-icons/lib/fa/refresh';
 
 class Calculator extends Component {
   constructor() {
