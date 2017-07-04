@@ -47,6 +47,7 @@ const Search = (
               id="search-field"
               value={searchValue}
               onChange={handleSearchChange}
+              autoFocus
             />
           </div>
         </fieldset>

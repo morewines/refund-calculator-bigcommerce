@@ -1,4 +1,5 @@
 function order(orderData, callback) {
+  console.log(orderData);
   //destructure orderData
   const {
     coupon_discount,
@@ -11,7 +12,8 @@ function order(orderData, callback) {
     total_tax,
     total_inc_tax,
     products,
-    shipping_cost_inc_tax
+    shipping_cost_inc_tax,
+    refunded_amount
   } = orderData;
 
   //assemble important info
@@ -28,7 +30,8 @@ function order(orderData, callback) {
     subtotal_ex_tax,
     total_tax,
     total_inc_tax,
-    shipping_cost_inc_tax
+    shipping_cost_inc_tax,
+    refunded_amount
   };
 
   //add coupon code if exist

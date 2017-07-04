@@ -19,6 +19,7 @@ const AccessForm = ({
             id="nameField"
             value={accessValue}
             onChange={handleAccessChange}
+            autoFocus
           />
           <button className="button-primary button-mw" type="submit">
             <SignIn size={18} style={{

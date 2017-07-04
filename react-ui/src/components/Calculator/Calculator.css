@@ -5,6 +5,35 @@
   height: 3.8rem;
 }
 
+.search-not-found {
+  position: absolute;
+  top: 4.5em;
+  /*left: 1.5em;*/
+  padding-left: .5em;
+  color: #b83821;
+  font-size: 1.2rem;
+}
+
+.calc-column-wrap {
+  font-size: 1rem;
+}
+
+tbody > tr:last-child > td {
+  border-bottom: 0;
+}
+
+/* Only mobile screen */
+@media (max-width: 40rem) {
+
+  th, td {
+    padding: .75rem .5rem;
+  }
+
+  th:first-child, td:first-child {
+    padding-right: 0;
+  }
+}
+
 /* Larger than mobile screen */
 @media (min-width: 40.0rem) {
 
@@ -12,11 +41,16 @@
     /*border: .1rem solid #b83821;*/
     /*border-radius: .4rem;*/
     /*background-color: rgba(184, 56, 33, .075);*/
-    min-height: 30em;
+    /*min-height: 30em;*/
+    font-size: 1.3rem;
   }
 
   .search-wrap {
     margin: 3em auto;
+  }
+
+  th:last-child, td:last-child {
+    padding-right: 1.5rem;
   }
 
 }

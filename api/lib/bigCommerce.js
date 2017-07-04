@@ -28,6 +28,10 @@ function findOrder(orderID, callback) {
 
   //send request to bc orders api
   request(options, (err, res, body) => {
+    console.log(res.statusCode);
+    if (res.statusCode !== 200) {
+      callback(res.statusCode)
+    }
     if (!err && res.statusCode == 200) {
       const orderData = JSON.parse(body);
 

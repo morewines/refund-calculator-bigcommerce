@@ -7,7 +7,7 @@ import './Calculator.css';
 //Modules
 import Search from '../Search/Search';
 import Button from '../Button/Button';
-import Loader from '../Loader/Loader';
+import OrderTable from '../OrderTable/OrderTable';
 import FaRefresh from 'react-icons/lib/fa/refresh';
 
 class Calculator extends Component {
@@ -15,6 +15,7 @@ class Calculator extends Component {
     super();
     this.state = {
       searchValue: '',
+      mostRecentSearch: '',
       searchPlaceholder: 'Order #',
       fetching: false,
       orderData: null
@@ -33,6 +34,7 @@ class Calculator extends Component {
         }
         else {
           this.setState({
+            mostRecentSearch: this.state.searchValue,
             searchValue: '',
             searchPlaceholder: 'Order #',
             orderData: res.body.assembledOrder,
@@ -65,7 +67,8 @@ class Calculator extends Component {
   }
 
   render() {
-    const { searchValue, fetching, searchPlaceholder } = this.state;
+    const { searchValue, fetching,
+      searchPlaceholder, orderData, mostRecentSearch } = this.state;
 
              /**       <Button
                   extraClass=""
@@ -82,6 +85,9 @@ class Calculator extends Component {
     return (
       <div className="container clearfix">
         <div className="search-wrap">
+          <div className="search-not-found">
+            {orderData === 404 ? <p><sup>*</sup>Order not found</p> : ''}
+          </div>
           <Search
             searchValue={searchValue}
             handleSearchChange={this.handleSearchChange}
@@ -94,12 +100,20 @@ class Calculator extends Component {
         <div className="row">
           <div className="column">
             <div className="calc-column-wrap">
-                {fetching ? <Loader extraClass="load-left"/> : ''}
+              { (orderData == null || orderData === 404) || fetching ? (
+                ''
+                ) : (
+                <div>
+                  <h5>Order # {mostRecentSearch} ({orderData.status})</h5>
+                  <OrderTable orderData={orderData} />
+                </div>
+                )
+              }
             </div>
           </div>
           <div className="column">
             <div className="calc-column-wrap">
-                {fetching ? <Loader extraClass="load-right"/> : ''}
+              test
             </div>
           </div>
 

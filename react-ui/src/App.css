@@ -1,4 +1,8 @@
 /* Base style */
+.container {
+  max-width: 148rem;
+}
+
 .wrapper {
   overflow: hidden;
     /*position: relative;*/

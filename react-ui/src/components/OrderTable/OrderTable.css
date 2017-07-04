@@ -1,0 +1,30 @@
+/* Base style */
+.order-table-item {
+  width: 30%;
+}
+
+.order-table-center {
+  text-align: center;
+}
+
+/* Larger than mobile screen */
+@media (min-width: 40.0rem) {
+
+  .table-currency {
+    padding-left: 2.5rem;
+  }
+
+  .order-table-item {
+    width: 42%;
+  }
+}
+
+/* Larger than tablet screen */
+@media (min-width: 80.0rem) {
+
+}
+
+/* Larger than desktop screen */
+@media (min-width: 120.0rem) {
+
+}
