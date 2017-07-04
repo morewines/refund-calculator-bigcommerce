@@ -28,7 +28,6 @@ function findOrder(orderID, callback) {
 
   //send request to bc orders api
   request(options, (err, res, body) => {
-    console.log(res.statusCode);
     if (res.statusCode !== 200) {
       callback(res.statusCode)
     }
@@ -56,7 +55,6 @@ function findOrder(orderID, callback) {
 
               //get urls for each product
               populateSku(assembledOrder.products, (updatedProducts) => {
-                console.log('updated products', updatedProducts);
                 assembledOrder.products = updatedProducts;
 
                 //send back to route
