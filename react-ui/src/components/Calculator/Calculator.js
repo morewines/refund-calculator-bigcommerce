@@ -8,6 +8,7 @@ import './Calculator.css';
 import Search from '../Search/Search';
 import Button from '../Button/Button';
 import OrderTable from '../OrderTable/OrderTable';
+import OrderEdit from '../OrderEdit/OrderEdit';
 // import FaRefresh from 'react-icons/lib/fa/refresh';
 
 class Calculator extends Component {
@@ -18,10 +19,13 @@ class Calculator extends Component {
       mostRecentSearch: '',
       searchPlaceholder: 'Order #',
       fetching: false,
-      orderData: null
+      orderData: null,
+      refundOrderData: null
     }
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.editSubtract = this.editSubtract.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   getOrder(searchValue) {
@@ -38,6 +42,7 @@ class Calculator extends Component {
             searchValue: '',
             searchPlaceholder: 'Order #',
             orderData: res.body.assembledOrder,
+            refundOrderData: res.body.assembledOrder,
             fetching: false
           })
           console.log(this.state);
@@ -66,9 +71,18 @@ class Calculator extends Component {
     }
   }
 
+  editSubtract(product) {
+    console.log(this.state.refundOrderData);
+  }
+
+  handleEditClick(product) {
+    console.log(product);
+  }
+
   render() {
     const { searchValue, fetching,
-      searchPlaceholder, orderData, mostRecentSearch } = this.state;
+      searchPlaceholder, orderData,
+      mostRecentSearch, refundOrderData } = this.state;
 
              /**       <Button
                   extraClass=""
@@ -113,7 +127,19 @@ class Calculator extends Component {
           </div>
           <div className="column">
             <div className="calc-column-wrap">
-              test
+              { (orderData == null || orderData === 404) || fetching ? (
+                ''
+                ) : (
+                <div>
+                  <h5>Edit Order &#8212; What is the customer keeping?</h5>
+                  <OrderEdit
+                    refundOrderData={refundOrderData}
+                    editSubtract={this.editSubtract}
+                    handleEditClick={this.handleEditClick}
+                  />
+                </div>
+                )
+              }
             </div>
           </div>
 

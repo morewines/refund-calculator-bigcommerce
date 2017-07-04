@@ -1,0 +1,19 @@
+.edit-table-header {
+  width: 11.2%;
+}
+
+.edit-table-total {
+  width: 15.2%;
+}
+.edit-table-adjust {
+  width: 62.4%;
+}
+
+.order-edit-info {
+  padding-left: 36rem !important;
+}
+
+/* Larger than mobile screen */
+@media (min-width: 40.0rem) {
+
+}
