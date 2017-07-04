@@ -11,9 +11,21 @@ import { format, total } from '../../lib/currency';
 
 const OrderTable = ({orderData}) => {
 
-  const { coupons, subtotal_ex_tax,
-    coupon_discount, shipping_cost_inc_tax,
-    total_tax } = orderData;
+  const {
+    coupons,
+    subtotal_ex_tax,
+    coupon_discount,
+    shipping_cost_inc_tax,
+    total_tax,
+    shipping_addresses: {
+      shipping_method,
+      state,
+      zip
+    },
+    refunded_amount,
+    items_total,
+    items_shipped
+  } = orderData;
 
   const productRow = orderData.products.map( (product, i) => {
     return (
@@ -39,14 +51,21 @@ const OrderTable = ({orderData}) => {
         <tbody>
           {productRow}
           <tr>
-            <td />
-            <td />
+            <td colSpan="2">
+              <div className="order-table-general-info">
+                To: {zip}, {state} via {shipping_method}
+              </div>
+              <div className="order-table-general-info">
+                Shipped: {`${items_shipped}/${items_total}`}
+              </div>
+            </td>
             <td colSpan="3" className="">
               <div>Subtotal</div>
               <div>Coupon Code {coupons ? `(${coupons})`: ''}</div>
               <div>Shipping</div>
               <div>Sales Tax</div>
-              <div><b>GRAND TOTAL</b></div>
+              <div>Refunded Amount</div>
+              <div className="order-total"><b>GRAND TOTAL</b></div>
             </td>
             <td className="order-table-center">
               <div className="clearfix">
@@ -74,6 +93,12 @@ const OrderTable = ({orderData}) => {
                 </span>
               </div>
               <div className="clearfix">
+                <div className="float-left order-dollar">$</div>
+                <span className="float-right">
+                  {format(refunded_amount)}
+                </span>
+              </div>
+              <div className="clearfix order-total">
                 <div className="float-left order-dollar"><b>$</b></div>
                 <span className="float-right">
                   <b>{format(grandTotal)}</b>

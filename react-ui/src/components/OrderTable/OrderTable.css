@@ -7,6 +7,14 @@
   text-align: center;
 }
 
+.order-total {
+  font-size:
+}
+
+.order-table-general-info {
+  padding: .5rem 0;
+}
+
 /* Larger than mobile screen */
 @media (min-width: 40.0rem) {
 
@@ -16,6 +24,10 @@
 
   .order-table-item {
     width: 44%;
+  }
+
+  .order-total {
+    margin-top: .75rem;
   }
 }
 
