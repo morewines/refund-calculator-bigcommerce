@@ -9,12 +9,7 @@ import RefundRow from './RefundRow/RefundRow';
 //lib
 import { format, total } from '../../lib/currency';
 
-const OrderEdit = (
-  {
-    refundOrderData,
-    editSubtract,
-    handleEditClick
-  }) => {
+const OrderEdit = ({refundOrderData, handleEditClick}) => {
 
   const {
     coupons,
@@ -32,11 +27,18 @@ const OrderEdit = (
     items_shipped
   } = refundOrderData;
 
+  const handleUpdateMathData = (updatedProduct, i) => {
+    //make copy to fix some weird orderData & refundOrderData bug
+    let updatedRefundData = JSON.parse(JSON.stringify(refundOrderData));
+    updatedRefundData.products[i] = updatedProduct;
+    handleEditClick(updatedRefundData);
+  }
+
   const productRow = refundOrderData.products.map( (product, i) => {
     return (
-      <RefundRow key={i} product={product}
-        editSubtract={editSubtract}
-        handleEditClick={handleEditClick}
+      <RefundRow key={i+1} product={product}
+        handleUpdateMathData={handleUpdateMathData}
+        index={i}
        />
     )
   })

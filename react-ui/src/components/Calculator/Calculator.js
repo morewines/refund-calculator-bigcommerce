@@ -24,7 +24,6 @@ class Calculator extends Component {
     }
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
-    this.editSubtract = this.editSubtract.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
   }
 
@@ -42,7 +41,7 @@ class Calculator extends Component {
             searchValue: '',
             searchPlaceholder: 'Order #',
             orderData: res.body.assembledOrder,
-            refundOrderData: res.body.assembledOrder,
+            refundOrderData: JSON.parse(JSON.stringify(res.body.assembledOrder)),
             fetching: false
           })
           console.log(this.state);
@@ -71,12 +70,10 @@ class Calculator extends Component {
     }
   }
 
-  editSubtract(product) {
-    console.log(this.state.refundOrderData);
-  }
-
-  handleEditClick(product) {
-    console.log(product);
+  handleEditClick(updatedRefundData) {
+    this.setState({
+      refundOrderData: updatedRefundData
+    })
   }
 
   render() {
@@ -127,14 +124,13 @@ class Calculator extends Component {
           </div>
           <div className="column">
             <div className="calc-column-wrap">
-              { (orderData == null || orderData === 404) || fetching ? (
+              { (refundOrderData == null || refundOrderData === 404) || fetching ? (
                 ''
                 ) : (
                 <div>
                   <h5>Edit Order &#8212; What is the customer keeping?</h5>
                   <OrderEdit
                     refundOrderData={refundOrderData}
-                    editSubtract={this.editSubtract}
                     handleEditClick={this.handleEditClick}
                   />
                 </div>
