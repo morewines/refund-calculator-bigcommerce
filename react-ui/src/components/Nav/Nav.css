@@ -16,3 +16,17 @@
 .logo {
     line-height: 5.2rem;
 }
+
+/* Only mobile screen */
+@media (max-width: 40rem) {
+  .hide-on-small {
+    display: none;
+  }
+}
+
+/* Table & up */
+@media(min-width: 40rem) {
+  .show-on-small-only {
+    display: none;
+  }
+}
