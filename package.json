@@ -1,7 +1,7 @@
 {
   "name": "refund-calculator-bigcommerce",
   "version": "1.0.0",
-  "description": "Internal Tool to Calculate Partial Refunds",
+  "description": "Internal Tool to Calculate Partial Refunds for Bigcommerce",
   "engines": {
     "node": "7.x"
   },
@@ -24,6 +24,6 @@
     "type": "git",
     "url": "https://github.com/morewines/refund-calculator-bigcommerce.git"
   },
-  "license": "MIT",
+  "license": "GPL-3.0",
   "devDependencies": {}
 }
