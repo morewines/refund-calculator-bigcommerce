@@ -28,7 +28,7 @@ Heroku-PostBuild
 
 ## Getting Started
 
-The live web app is behind an access key however, feel free to run a local version with an access code of your choosing and your own BigCommerce API credentials.
+The live web app is behind an access key. However, feel free to run a local version by setting your own access code and BigCommerce API credentials in your environment variables.
 
 ## Next Steps
 
