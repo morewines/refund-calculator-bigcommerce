@@ -22,6 +22,10 @@
   .hide-on-small {
     display: none;
   }
+
+  .logo {
+    text-align: center;
+  }
 }
 
 /* Table & up */
