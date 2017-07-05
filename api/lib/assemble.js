@@ -34,9 +34,10 @@ function order(orderData, callback) {
     refunded_amount
   };
 
-  //add coupon code if exist
+  //add coupon code and rate of coupon if exist
   if (coupons.code) {
     assembledOrder.coupons = coupons.code;
+    assembledOrder.coupon_rate = coupons.amount;
   }
 
   //assemble products array info

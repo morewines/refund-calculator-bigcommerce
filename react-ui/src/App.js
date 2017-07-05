@@ -58,7 +58,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(window);
     const {
       isAllowedAccess,
       accessValue,

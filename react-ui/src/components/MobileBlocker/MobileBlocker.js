@@ -17,7 +17,7 @@ const MobileBlocker = () => (
         <p>
           BigCommerce Partial Refund Calculator is not
           compatible with mobile or tablet devices due to
-          the requirement for large tables.
+          wide information tables.
         </p>
         <p>
           Please visit this web app on a desktop or laptop
