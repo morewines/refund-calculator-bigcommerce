@@ -2,13 +2,13 @@
 
 #### Purpose
 
-Internal tool to minimize errors and greatly boost efficiency by eliminating the need to manually calculate partial refunds.
+Internal tool to minimize errors and greatly boost efficiency by eliminating manually calculated partial refunds.
 
-This tool saves 5-7 minutes of manual calculation plus the required double check for each partial refund transaction processed.
+This tool saves 5-7 minutes of manual calculation **in addition** to the required double check for each manual partial refund transaction processed.
 
 #### Why?? Why in the world would you need a tool like this?
 
-Well... BigCommerce doesn't have automatic partial refund calculation like most other platforms.
+Well... BigCommerce doesn't have automatic partial refund calculation unlike other OOTB ecommerce platforms.
 
 ## Technology Used
 
@@ -26,7 +26,7 @@ NodeJS | ExpressJS | Request | BigCommerce API
 
 Heroku-PostBuild
 
-##Next Steps
+## Next Steps
 
 ##### Near Term
 
