@@ -1,4 +1,4 @@
-# refund-calculator-bigcommerce
+# Partial Refund Calculator <sup>for BigCommerce!</sup>
 
 #### Purpose
 
@@ -25,6 +25,10 @@ NodeJS | ExpressJS | Request | BigCommerce API
 #### Deployment:
 
 Heroku-PostBuild
+
+## Getting Started
+
+The live web app is behind an access key however, feel free to run a local version with an access code of your choosing and your own BigCommerce API credentials.
 
 ## Next Steps
 
