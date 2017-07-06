@@ -34,7 +34,8 @@ The live web app is behind an access key. However, feel free to run a local vers
 
 ##### Near Term
 
-- Integrate with ShipperHQ to automatically pull shipping rates
+- Ability to add substitute items or completely remove items from order instead of just adjustments
+- Integrate with ShipperHQ to automatically pull shipping rates (dependant on pending API access)
 - Have a sidebar of 7 day rolling orders to save a few seconds more time (low prio)
 
 ##### Long Term
