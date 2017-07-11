@@ -1,0 +1,12 @@
+.button-center {
+  margin: 0 auto;
+}
+
+.button-space {
+  margin-top: 1.5em;
+}
+
+.fake-label {
+  font-size: 1.6rem;
+  font-weight: 700;
+}

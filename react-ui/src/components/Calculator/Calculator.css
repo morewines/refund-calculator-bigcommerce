@@ -18,6 +18,14 @@
   font-size: 1rem;
 }
 
+.center-text {
+  text-align: center;
+}
+
+.calc-button-wrap {
+  margin: -1.5em 0 1em;
+}
+
 tbody > tr:last-child > td {
   border-bottom: 0;
 }

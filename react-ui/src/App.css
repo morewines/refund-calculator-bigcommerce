@@ -30,6 +30,15 @@ input[type='text']:focus {
   border-color: #b83821;
 }
 
+input[type='number']:focus {
+  border-color: #b83821;
+}
+
+select:focus {
+  border-color: #b83821;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 0 29 14" width="29"><path fill="#b83821" d="M9.37727 3.625l5.08154 6.93523L19.54036 3.625"/></svg>')
+}
+
 input[type='submit'] {
   background-color: #b83821;
   border-color: #b83821;
