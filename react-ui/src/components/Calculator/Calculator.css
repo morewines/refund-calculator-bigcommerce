@@ -26,6 +26,10 @@
   margin: -1.5em 0 1em;
 }
 
+.calc-button-top {
+  margin-right: 1.5rem !important;
+}
+
 tbody > tr:last-child > td {
   border-bottom: 0;
 }

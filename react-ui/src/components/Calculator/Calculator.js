@@ -24,6 +24,7 @@ class Calculator extends Component {
       fetching: false,
       orderData: null,
       refundOrderData: null,
+      copyOriginalData: null,
       showModal: false,
       substituteItemWeight: '3.5',
       substituteItemName: '',
@@ -38,6 +39,7 @@ class Calculator extends Component {
     this.handleSubstituteWeightChange = this.handleSubstituteWeightChange.bind(this);
     this.handleSubstituteInputChange = this.handleSubstituteInputChange.bind(this);
     this.handleSubstituteSubmit = this.handleSubstituteSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   getOrder(searchValue) {
@@ -55,6 +57,7 @@ class Calculator extends Component {
             searchPlaceholder: 'Order #',
             orderData: res.body.assembledOrder,
             refundOrderData: JSON.parse(JSON.stringify(res.body.assembledOrder)),
+            copyOriginalData: JSON.parse(JSON.stringify(res.body.assembledOrder)),
             fetching: false
           })
           console.log(this.state);
@@ -159,9 +162,12 @@ class Calculator extends Component {
 
     this.setState({
       refundOrderData: newRefundOrderData,
-      orderData: newOrderData
+      orderData: newOrderData,
+      substituteItemWeight: '3.5',
+      substituteItemName: '',
+      substituteItemPrice: '',
+      substituteItemQty: '1'
     })
-    console.log(this.state)
   }
 
   handleCloseModal() {
@@ -174,6 +180,16 @@ class Calculator extends Component {
     this.setState({
       showModal: true
     })
+  }
+
+  handleReset(evt) {
+    evt.preventDefault();
+
+    this.setState({
+      refundOrderData: JSON.parse(JSON.stringify(this.state.copyOriginalData)),
+      orderData: JSON.parse(JSON.stringify(this.state.copyOriginalData))
+    })
+    console.log(this.state);
   }
 
   render() {
@@ -214,14 +230,14 @@ class Calculator extends Component {
           ) : (
           <div className="center-text calc-button-wrap">
             <Button
-              extraClass=""
-              buttonText="Reset Edit Table"
+              extraClass="calc-button-top"
+              buttonText="Reset Order"
               icon={
                 <FaRefresh size={18} className="fa-spin" style={{
                   marginBottom: '3px',
                   marginRight: '1em'
-                }}/>
-              }
+              }}/>}
+              handleClick={this.handleReset}
             />
             <Button
               extraClass=""
