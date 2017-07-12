@@ -12,7 +12,9 @@ const AddSubstitute = ({
     substituteItemPrice,
     substituteItemQty,
     handleSubstituteWeightChange,
-    handleSubstituteInputChange
+    handleSubstituteInputChange,
+    handleSubstituteKeyPress,
+    handleSubstituteSubmit
   }) => {
 
   return (
@@ -20,7 +22,7 @@ const AddSubstitute = ({
       <h4>Add Substitute Item</h4>
       <div className="row">
         <div className="column column-75">
-          <form>
+          <form onSubmit={handleSubstituteSubmit}>
             <label htmlFor="item-name">Item Name</label>
             <input name="substituteItemName"
               value={substituteItemName}
@@ -32,7 +34,7 @@ const AddSubstitute = ({
                 <input name="substituteItemPrice"
                   value={substituteItemPrice}
                   onChange={handleSubstituteInputChange}
-                  type="number" placeholder="" id="item-price" />
+                  type="text" placeholder="" id="item-price" />
               </div>
               <div className="column">
                 <fieldset>
@@ -50,7 +52,7 @@ const AddSubstitute = ({
                 <input name="substituteItemQty"
                   value={substituteItemQty}
                   onChange={handleSubstituteInputChange}
-                  type="number" placeholder="" id="item-qty" />
+                  type="text" placeholder="" id="item-qty" />
               </div>
             </div>
             <button className="button-primary button-mw button-space"

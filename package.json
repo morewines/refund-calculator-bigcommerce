@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Internal Tool to Calculate Partial Refunds for Bigcommerce",
   "engines": {
-    "node": "7.x"
+    "node": "7.10.1"
   },
   "scripts": {
     "start": "node api/server",

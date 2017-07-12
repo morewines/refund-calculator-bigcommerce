@@ -26,9 +26,9 @@ class Calculator extends Component {
       refundOrderData: null,
       showModal: false,
       substituteItemWeight: '3.5',
-      substituteItemName: null,
-      substituteItemPrice: null,
-      substituteItemQty: null
+      substituteItemName: '',
+      substituteItemPrice: '',
+      substituteItemQty: '1'
     }
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -37,6 +37,7 @@ class Calculator extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleSubstituteWeightChange = this.handleSubstituteWeightChange.bind(this);
     this.handleSubstituteInputChange = this.handleSubstituteInputChange.bind(this);
+    this.handleSubstituteSubmit = this.handleSubstituteSubmit.bind(this);
   }
 
   getOrder(searchValue) {
@@ -96,10 +97,48 @@ class Calculator extends Component {
 
   handleSubstituteInputChange(evt) {
     const name = evt.target.name;
-    console.log(name, evt.target.value);
-    this.setState({
-      [name]: evt.target.value
-    })
+    let value = evt.target.value;
+    if (name === 'substituteItemQty') {
+      // if number of value is positive or is blank AND doesn't include .
+      if ( (+value > 0 || value === '') && !value.includes('.') ) {
+        this.setState({
+          [name]: value
+        })
+      }
+    }
+    else if (name === 'substituteItemPrice') {
+      //value has to be positive or blank
+      if (+value > 0 || value === '') {
+        this.setState({
+          [name]: value
+        })
+      }
+    }
+    else {
+      this.setState({
+        [name]: evt.target.value
+      })
+    }
+  }
+
+  handleSubstituteSubmit(evt) {
+    evt.preventDefault();
+
+    const {
+      substituteItemWeight,
+      substituteItemName,
+      substituteItemPrice,
+      substituteItemQty
+    } = this.state;
+
+    let newSubstituteItem = {
+      substituteItemWeight,
+      substituteItemName,
+      substituteItemPrice,
+      substituteItemQty
+    }
+
+    console.log(newSubstituteItem);
   }
 
   handleCloseModal() {
@@ -144,6 +183,7 @@ class Calculator extends Component {
             handleSearchSubmit={this.handleSearchSubmit}
             fetching={fetching}
             searchPlaceholder={searchPlaceholder}
+
           />
         </div>
 
@@ -179,7 +219,9 @@ class Calculator extends Component {
             handleSubstituteWeightChange={this.handleSubstituteWeightChange}
             substituteItemName={this.state.substituteItemName}
             substituteItemQty={this.state.substituteItemQty}
+            substituteItemPrice={this.state.substituteItemPrice}
             handleSubstituteInputChange={this.handleSubstituteInputChange}
+            handleSubstituteSubmit={this.handleSubstituteSubmit}
           />
           </ReactModal>
         </div>
