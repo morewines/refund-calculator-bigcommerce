@@ -64,7 +64,6 @@ class Calculator extends Component {
             copyOriginalData: JSON.parse(JSON.stringify(res.body.assembledOrder)),
             fetching: false
           })
-          console.log(this.state);
         }
       })
   }
@@ -311,7 +310,7 @@ class Calculator extends Component {
               style={shippingModalStyle}
               contentLabel="Update Shipping"
             >
-              test
+              Feature in progress
             </ReactModal>
           </div>
         )}
