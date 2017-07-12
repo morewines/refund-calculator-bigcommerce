@@ -34,14 +34,14 @@ The live web app is behind an access key. However, feel free to run a local vers
 
 ##### Near Term
 
-- Ability to add substitute items or completely remove items from order instead of just adjustments
-- Integrate with ShipperHQ to automatically pull shipping rates (dependant on pending API access)
-- Have a sidebar of 7 day rolling orders to save a few seconds more time (low prio)
+- [x] Ability to add substitute items or completely remove items from order instead of just adjustments
+- [ ] Have a sidebar of 7 day rolling orders to save a few seconds more time (low prio)
+- [ ] Integrate with ShipperHQ to automatically pull shipping rates (dependant on pending API access) *Not possible, ShipperHQ does not have a public API for BigCommerce stores.
 
 ##### Long Term
 
-- Integrate with BigCommerce as well as Payment Processor for one click process refunds rather than logging into BC and Payment Gateway
+- [ ] Integrate with BigCommerce as well as Payment Processor for one click process refunds rather than logging into BC and Payment Gateway
 
 ##### Probably Never Term
 
-- Turn into single click BigCommerce Marketplace App
+- [ ] Turn into single click BigCommerce Marketplace App
