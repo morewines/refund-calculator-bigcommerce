@@ -36,7 +36,7 @@ The live web app is behind an access key. However, feel free to run a local vers
 
 - [x] Ability to add substitute items or completely remove items from order instead of just adjustments
 - [ ] Have a sidebar of 7 day rolling orders to save a few seconds more time (low prio)
-- [ ] Integrate with ShipperHQ to automatically pull shipping rates (dependant on pending API access) *Not possible, ShipperHQ does not have a public API for BigCommerce stores.
+- [ ] Integrate with ShipperHQ to automatically pull shipping rates (dependent on pending API access) *Not possible, ShipperHQ does not have a public API for BigCommerce stores.
 
 ##### Long Term
 
