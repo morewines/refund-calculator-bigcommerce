@@ -28,14 +28,16 @@ const AddSubstitute = ({
             <input name="substituteItemName"
               value={substituteItemName}
               onChange={handleSubstituteInputChange}
-              type="text" placeholder="Ex: Pinnacle Mimosa Flavored Vodka 750ml" id="item-name" />
+              type="text" placeholder="Ex: Pinnacle Mimosa Flavored Vodka 750ml" id="item-name"
+              required />
             <div className="row">
               <div className="column">
                 <label htmlFor="item-price">Price</label>
                 <input name="substituteItemPrice"
                   value={substituteItemPrice}
                   onChange={handleSubstituteInputChange}
-                  type="text" placeholder="Ex: 12.99" id="item-price" />
+                  type="text" placeholder="Ex: 12.99" id="item-price"
+                  required />
               </div>
               <div className="column">
                 <fieldset>
@@ -53,7 +55,8 @@ const AddSubstitute = ({
                 <input name="substituteItemQty"
                   value={substituteItemQty}
                   onChange={handleSubstituteInputChange}
-                  type="number" placeholder="" id="item-qty" />
+                  type="number" placeholder="" id="item-qty"
+                  required  />
               </div>
             </div>
             <button className="button-primary button-mw button-space"

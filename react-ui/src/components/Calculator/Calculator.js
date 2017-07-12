@@ -13,6 +13,7 @@ import OrderEdit from '../OrderEdit/OrderEdit';
 import AddSubstitute from '../AddSubstitute/AddSubstitute';
 import FaPlus from 'react-icons/lib/fa/plus';
 import FaRefresh from 'react-icons/lib/fa/refresh';
+import FaEdit from 'react-icons/lib/fa/edit'
 
 class Calculator extends Component {
   constructor() {
@@ -26,6 +27,7 @@ class Calculator extends Component {
       refundOrderData: null,
       copyOriginalData: null,
       showModal: false,
+      showShippingModal: false,
       substituteItemWeight: '3.5',
       substituteItemName: '',
       substituteItemPrice: '',
@@ -36,6 +38,8 @@ class Calculator extends Component {
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleCloseShippingModal = this.handleCloseShippingModal.bind(this);
+    this.handleOpenShippingModal = this.handleOpenShippingModal.bind(this);
     this.handleSubstituteWeightChange = this.handleSubstituteWeightChange.bind(this);
     this.handleSubstituteInputChange = this.handleSubstituteInputChange.bind(this);
     this.handleSubstituteSubmit = this.handleSubstituteSubmit.bind(this);
@@ -182,6 +186,18 @@ class Calculator extends Component {
     })
   }
 
+  handleCloseShippingModal() {
+    this.setState({
+      showShippingModal: false
+    })
+  }
+
+  handleOpenShippingModal() {
+    this.setState({
+      showShippingModal: true
+    })
+  }
+
   handleReset(evt) {
     evt.preventDefault();
 
@@ -210,6 +226,19 @@ class Calculator extends Component {
       }
     }
 
+    const shippingModalStyle = {
+      overlay: {
+        backgroundColor: 'rgba(96, 108, 118, .5)',
+        top: '52px'
+      },
+      content: {
+        height: '17.2rem',
+        margin: 'auto',
+        width: '90rem',
+        maxWidth: '80%'
+      }
+    }
+
     return (
       <div className="container clearfix">
         <div className="search-wrap">
@@ -229,6 +258,7 @@ class Calculator extends Component {
           ''
           ) : (
           <div className="center-text calc-button-wrap">
+            <hr className="divider" />
             <Button
               extraClass="calc-button-top"
               buttonText="Reset Order"
@@ -240,7 +270,7 @@ class Calculator extends Component {
               handleClick={this.handleReset}
             />
             <Button
-              extraClass=""
+              extraClass="calc-button-top"
               buttonText="Add Substitute"
               icon={
                 <FaPlus size={18} className="fa-spin" style={{
@@ -264,6 +294,24 @@ class Calculator extends Component {
               handleSubstituteInputChange={this.handleSubstituteInputChange}
               handleSubstituteSubmit={this.handleSubstituteSubmit}
             />
+            </ReactModal>
+            <Button
+              extraClass=""
+              buttonText="Update Shipping"
+              icon={
+                <FaEdit size={18} className="fa-spin" style={{
+                  marginBottom: '3px',
+                  marginRight: '1em'
+              }}/>}
+              handleClick={this.handleOpenShippingModal}
+            />
+            <ReactModal
+              isOpen={this.state.showShippingModal}
+              onRequestClose={this.handleCloseShippingModal}
+              style={shippingModalStyle}
+              contentLabel="Update Shipping"
+            >
+              test
             </ReactModal>
           </div>
         )}

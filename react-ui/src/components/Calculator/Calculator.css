@@ -30,6 +30,12 @@
   margin-right: 1.5rem !important;
 }
 
+.divider {
+  max-width: 80rem;
+  margin: 5.5rem auto 3rem;
+  border-color: #d1d1d1;
+}
+
 tbody > tr:last-child > td {
   border-bottom: 0;
 }
