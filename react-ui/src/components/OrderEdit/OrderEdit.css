@@ -1,21 +1,42 @@
 .edit-table-header {
-  width: 11.2%;
+  width: 13%;
 }
 
 .edit-table-total {
-  width: 15.2%;
+  width: 17%;
 }
 .edit-table-adjust {
-  width: 62.4%;
+  width: 31.4%;
 }
 
 .order-edit-info {
-  padding-left: 36rem !important;
+  padding-left: 12rem !important;
 }
 
 /* Larger than mobile screen */
 @media (min-width: 40.0rem) {
   td {
     padding: 1rem 0;
+  }
+
+.order-edit-info {
+    padding-left: 15rem !important;
+  }
+}
+
+/* Larger than tablet screen */
+@media (min-width: 80rem) {
+  .order-edit-info {
+    padding-left: 35rem !important;
+  }
+
+  .edit-table-header {
+    width: 11.2%;
+  }
+  .edit-table-total {
+    width: 16.2%;
+  }
+  .edit-table-adjust {
+    width: 61.4%;
   }
 }

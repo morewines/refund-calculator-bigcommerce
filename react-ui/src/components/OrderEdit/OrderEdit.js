@@ -7,25 +7,17 @@ import './OrderEdit.css';
 import RefundRow from './RefundRow/RefundRow';
 
 //lib
-import { format, total, subtotal, coupontotal } from '../../lib/currency';
+import { format, subtotal, coupontotal } from '../../lib/currency';
 
 const OrderEdit = ({refundOrderData, handleEditClick}) => {
 
   const {
     coupons,
-    subtotal_ex_tax,
     coupon_discount,
     coupon_rate,
     shipping_cost_inc_tax,
     total_tax,
-    shipping_addresses: {
-      shipping_method,
-      state,
-      zip
-    },
     refunded_amount,
-    items_total,
-    items_shipped,
     products
   } = refundOrderData;
 

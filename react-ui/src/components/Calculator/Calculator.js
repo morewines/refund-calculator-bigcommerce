@@ -128,17 +128,40 @@ class Calculator extends Component {
       substituteItemWeight,
       substituteItemName,
       substituteItemPrice,
-      substituteItemQty
+      substituteItemQty,
+      refundOrderData,
+      orderData
     } = this.state;
 
     let newSubstituteItem = {
-      substituteItemWeight,
-      substituteItemName,
-      substituteItemPrice,
-      substituteItemQty
+      weight: substituteItemWeight,
+      name: substituteItemName,
+      price_ex_tax: substituteItemPrice,
+      quantity: +substituteItemQty
     }
 
-    console.log(newSubstituteItem);
+    let originalOrderSubstituteItem = {
+      weight: substituteItemWeight,
+      name: substituteItemName,
+      price_ex_tax: substituteItemPrice,
+      quantity: 0,
+      sku: 'n/a',
+      url: '/'
+    }
+
+    this.handleCloseModal();
+
+    let newRefundOrderData = refundOrderData;
+    newRefundOrderData.products.push(newSubstituteItem);
+
+    let newOrderData = orderData;
+    newOrderData.products.push(originalOrderSubstituteItem);
+
+    this.setState({
+      refundOrderData: newRefundOrderData,
+      orderData: newOrderData
+    })
+    console.log(this.state)
   }
 
   handleCloseModal() {
@@ -186,45 +209,48 @@ class Calculator extends Component {
 
           />
         </div>
-
-        <div className="center-text calc-button-wrap">
-          <Button
-            extraClass=""
-            buttonText="Start Over"
-            icon={
-              <FaRefresh size={18} className="fa-spin" style={{
-                marginBottom: '3px',
-                marginRight: '1em'
-              }}/>
-            }
-          />
-          <Button
-            extraClass=""
-            buttonText="Add Substitute"
-            icon={
-              <FaPlus size={18} className="fa-spin" style={{
-                marginBottom: '3px',
-                marginRight: '1em'
-              }}/>}
-            handleClick={this.handleOpenModal}
-          />
-          <ReactModal
-            isOpen={this.state.showModal}
-            onRequestClose={this.handleCloseModal}
-            style={substituteModalStyle}
-            contentLabel="Add Substitute Item"
-          >
-          <AddSubstitute
-            substituteItemWeight={this.state.substituteItemWeight}
-            handleSubstituteWeightChange={this.handleSubstituteWeightChange}
-            substituteItemName={this.state.substituteItemName}
-            substituteItemQty={this.state.substituteItemQty}
-            substituteItemPrice={this.state.substituteItemPrice}
-            handleSubstituteInputChange={this.handleSubstituteInputChange}
-            handleSubstituteSubmit={this.handleSubstituteSubmit}
-          />
-          </ReactModal>
-        </div>
+        { (refundOrderData == null || refundOrderData === 404) || fetching ? (
+          ''
+          ) : (
+          <div className="center-text calc-button-wrap">
+            <Button
+              extraClass=""
+              buttonText="Reset Edit Table"
+              icon={
+                <FaRefresh size={18} className="fa-spin" style={{
+                  marginBottom: '3px',
+                  marginRight: '1em'
+                }}/>
+              }
+            />
+            <Button
+              extraClass=""
+              buttonText="Add Substitute"
+              icon={
+                <FaPlus size={18} className="fa-spin" style={{
+                  marginBottom: '3px',
+                  marginRight: '1em'
+                }}/>}
+              handleClick={this.handleOpenModal}
+            />
+            <ReactModal
+              isOpen={this.state.showModal}
+              onRequestClose={this.handleCloseModal}
+              style={substituteModalStyle}
+              contentLabel="Add Substitute Item"
+            >
+            <AddSubstitute
+              substituteItemWeight={this.state.substituteItemWeight}
+              handleSubstituteWeightChange={this.handleSubstituteWeightChange}
+              substituteItemName={this.state.substituteItemName}
+              substituteItemQty={this.state.substituteItemQty}
+              substituteItemPrice={this.state.substituteItemPrice}
+              handleSubstituteInputChange={this.handleSubstituteInputChange}
+              handleSubstituteSubmit={this.handleSubstituteSubmit}
+            />
+            </ReactModal>
+          </div>
+        )}
 
         <div className="row">
           <div className="column">

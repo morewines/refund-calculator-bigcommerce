@@ -18,23 +18,24 @@ const AddSubstitute = ({
   }) => {
 
   return (
-    <div>
+    <div className="add-substitute-wrapper">
       <h4>Add Substitute Item</h4>
       <div className="row">
         <div className="column column-75">
-          <form onSubmit={handleSubstituteSubmit}>
+          <form className="substitute-form"
+            onSubmit={handleSubstituteSubmit}>
             <label htmlFor="item-name">Item Name</label>
             <input name="substituteItemName"
               value={substituteItemName}
               onChange={handleSubstituteInputChange}
-              type="text" placeholder="" id="item-name" />
+              type="text" placeholder="Ex: Pinnacle Mimosa Flavored Vodka 750ml" id="item-name" />
             <div className="row">
               <div className="column">
                 <label htmlFor="item-price">Price</label>
                 <input name="substituteItemPrice"
                   value={substituteItemPrice}
                   onChange={handleSubstituteInputChange}
-                  type="text" placeholder="" id="item-price" />
+                  type="text" placeholder="Ex: 12.99" id="item-price" />
               </div>
               <div className="column">
                 <fieldset>
@@ -52,7 +53,7 @@ const AddSubstitute = ({
                 <input name="substituteItemQty"
                   value={substituteItemQty}
                   onChange={handleSubstituteInputChange}
-                  type="text" placeholder="" id="item-qty" />
+                  type="number" placeholder="" id="item-qty" />
               </div>
             </div>
             <button className="button-primary button-mw button-space"
@@ -67,7 +68,7 @@ const AddSubstitute = ({
         </div>
         <div className="column column-25">
           <div className="fake-label">Reminders</div>
-          <p>Enter price and qty as numbers</p>
+            <p>Plastic 1.75L are 4lbs. Anything smaller is 3.5lbs.</p>
         </div>
       </div>
     </div>

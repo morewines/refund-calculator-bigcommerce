@@ -3,7 +3,7 @@
   line-height: 1.7rem;
   padding: 0 1rem;
   margin: 0 1rem 0 0;
-  font-size: 1.7rem;
+  font-size: 1rem;
   background-color: white;
   border-color: white;
   color: grey;
@@ -13,4 +13,18 @@
   background-color: white;
   color: #b83821;
   border-color: white
+}
+
+/* Larger than mobile screen */
+@media (min-width: 40.0rem) {
+  .math-button {
+    font-size: 1.3rem;
+  }
+}
+
+/* Larger than tablet screen */
+@media (min-width: 80.0rem) {
+  .math-button {
+    font-size: 1.7rem;
+  }
 }

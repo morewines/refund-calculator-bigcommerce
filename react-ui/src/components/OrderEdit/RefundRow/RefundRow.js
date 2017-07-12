@@ -12,7 +12,7 @@ import FaMinus from 'react-icons/lib/fa/minus';
 import { format } from '../../../lib/currency';
 
 const RefundRow = ({product, handleUpdateMathData, index}) => {
-  const { name, quantity, price_ex_tax, url, sku, weight } = product;
+  const { quantity, price_ex_tax } = product;
 
   const handleSubtract = () => {
     //make copy to fix some weird orderData & refundOrderData bug
