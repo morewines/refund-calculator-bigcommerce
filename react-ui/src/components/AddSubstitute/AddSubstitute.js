@@ -29,6 +29,7 @@ const AddSubstitute = ({
               value={substituteItemName}
               onChange={handleSubstituteInputChange}
               type="text" placeholder="Ex: Pinnacle Mimosa Flavored Vodka 750ml" id="item-name"
+              autoFocus
               required />
             <div className="row">
               <div className="column">

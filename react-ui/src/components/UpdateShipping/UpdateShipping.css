@@ -1,0 +1,13 @@
+.update-shipping-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.button-space-shipping {
+  margin-top: 1.5em;
+}
+
+.shipping-form {
+  margin-bottom: 0;
+}

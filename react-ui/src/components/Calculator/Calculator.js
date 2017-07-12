@@ -11,6 +11,7 @@ import Button from '../Button/Button';
 import OrderTable from '../OrderTable/OrderTable';
 import OrderEdit from '../OrderEdit/OrderEdit';
 import AddSubstitute from '../AddSubstitute/AddSubstitute';
+import UpdateShipping from '../UpdateShipping/UpdateShipping';
 import FaPlus from 'react-icons/lib/fa/plus';
 import FaRefresh from 'react-icons/lib/fa/refresh';
 import FaEdit from 'react-icons/lib/fa/edit'
@@ -31,7 +32,8 @@ class Calculator extends Component {
       substituteItemWeight: '3.5',
       substituteItemName: '',
       substituteItemPrice: '',
-      substituteItemQty: '1'
+      substituteItemQty: '1',
+      updateShippingCost: ''
     }
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -44,6 +46,8 @@ class Calculator extends Component {
     this.handleSubstituteInputChange = this.handleSubstituteInputChange.bind(this);
     this.handleSubstituteSubmit = this.handleSubstituteSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.handleShippingCostUpdate = this.handleShippingCostUpdate.bind(this);
+    this.handleShippingSubmit = this.handleShippingSubmit.bind(this);
   }
 
   getOrder(searchValue) {
@@ -204,7 +208,37 @@ class Calculator extends Component {
       refundOrderData: JSON.parse(JSON.stringify(this.state.copyOriginalData)),
       orderData: JSON.parse(JSON.stringify(this.state.copyOriginalData))
     })
-    console.log(this.state);
+  }
+
+  handleShippingCostUpdate(evt) {
+    evt.preventDefault();
+
+    const name = evt.target.name;
+    let value = evt.target.value;
+
+    if (+value > 0 || value === '') {
+      this.setState({
+        [name]: value
+      })
+    }
+  }
+
+  handleShippingSubmit(evt) {
+    evt.preventDefault();
+
+    const {
+      refundOrderData, updateShippingCost
+    } = this.state;
+
+    let newRefundOrderData = refundOrderData;
+
+    newRefundOrderData.shipping_cost_inc_tax = updateShippingCost;
+
+    this.setState({
+      refundOrderData: JSON.parse(JSON.stringify(newRefundOrderData)),
+      updateShippingCost: '',
+      showShippingModal: false
+    })
   }
 
   render() {
@@ -231,7 +265,7 @@ class Calculator extends Component {
         top: '52px'
       },
       content: {
-        height: '17.2rem',
+        height: '26.2rem',
         margin: 'auto',
         width: '90rem',
         maxWidth: '80%'
@@ -284,15 +318,15 @@ class Calculator extends Component {
               style={substituteModalStyle}
               contentLabel="Add Substitute Item"
             >
-            <AddSubstitute
-              substituteItemWeight={this.state.substituteItemWeight}
-              handleSubstituteWeightChange={this.handleSubstituteWeightChange}
-              substituteItemName={this.state.substituteItemName}
-              substituteItemQty={this.state.substituteItemQty}
-              substituteItemPrice={this.state.substituteItemPrice}
-              handleSubstituteInputChange={this.handleSubstituteInputChange}
-              handleSubstituteSubmit={this.handleSubstituteSubmit}
-            />
+              <AddSubstitute
+                substituteItemWeight={this.state.substituteItemWeight}
+                handleSubstituteWeightChange={this.handleSubstituteWeightChange}
+                substituteItemName={this.state.substituteItemName}
+                substituteItemQty={this.state.substituteItemQty}
+                substituteItemPrice={this.state.substituteItemPrice}
+                handleSubstituteInputChange={this.handleSubstituteInputChange}
+                handleSubstituteSubmit={this.handleSubstituteSubmit}
+              />
             </ReactModal>
             <Button
               extraClass=""
@@ -310,7 +344,11 @@ class Calculator extends Component {
               style={shippingModalStyle}
               contentLabel="Update Shipping"
             >
-              Feature in progress
+              <UpdateShipping
+                updateShippingCost={this.state.updateShippingCost}
+                handleShippingCostUpdate={this.handleShippingCostUpdate}
+                handleShippingSubmit={this.handleShippingSubmit}
+              />
             </ReactModal>
           </div>
         )}
