@@ -16,6 +16,10 @@ import FaPlus from 'react-icons/lib/fa/plus';
 import FaRefresh from 'react-icons/lib/fa/refresh';
 import FaEdit from 'react-icons/lib/fa/edit'
 
+//lib
+import { format, total,
+  subtotal, coupontotal } from '../../lib/currency';
+
 class Calculator extends Component {
   constructor() {
     super();
@@ -34,9 +38,7 @@ class Calculator extends Component {
       substituteItemPrice: '',
       substituteItemQty: '1',
       updateShippingCost: '',
-      refundAmount: '0',
-      orderGrandTotal: '0',
-      refundGrandTotal: '0'
+      originalGrandTotal: ''
     }
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -51,7 +53,6 @@ class Calculator extends Component {
     this.handleReset = this.handleReset.bind(this);
     this.handleShippingCostUpdate = this.handleShippingCostUpdate.bind(this);
     this.handleShippingSubmit = this.handleShippingSubmit.bind(this);
-    this.grabGrandTotal = this.grabGrandTotal.bind(this);
   }
 
   getOrder(searchValue) {
@@ -72,6 +73,7 @@ class Calculator extends Component {
             copyOriginalData: JSON.parse(JSON.stringify(res.body.assembledOrder)),
             fetching: false
           })
+          this.calculateOriginalTotal();
         }
       })
   }
@@ -245,33 +247,37 @@ class Calculator extends Component {
     })
   }
 
-  grabGrandTotal(total) {
-    // if (total.originalTotal) {
-    //   this.setState({
-    //     originalGrandTotal: total.originalTotal
-    //   })
-    // }
-    // else {
-    //   this.setState({
-    //     refundGrandTotal: total.refundTotal
-    //   })
-    // }
-    console.log(total);
+  calculateOriginalTotal() {
+    const {
+      subtotal_ex_tax,
+      shipping_cost_inc_tax,
+      total_tax,
+      coupon_discount
+    } = this.state.orderData;
+
+    let grandTotal = total([subtotal_ex_tax, shipping_cost_inc_tax, total_tax], coupon_discount);
+
+    this.setState({
+      originalGrandTotal: grandTotal
+    })
   }
 
   calculateRefund() {
-    let {
-      originalGrandTotal,
-      refundGrandTotal
+    const {
+      originalGrandTotal
     } = this.state;
 
-    console.log(originalGrandTotal, refundGrandTotal);
+    let refund = originalGrandTotal;
+    return refund;
   }
 
   render() {
+    console.log(this.state);
+
     const { searchValue, fetching,
       searchPlaceholder, orderData,
-      mostRecentSearch, refundOrderData } = this.state;
+      mostRecentSearch, refundOrderData,
+      originalGrandTotal } = this.state;
 
     const substituteModalStyle = {
       overlay: {
@@ -379,7 +385,7 @@ class Calculator extends Component {
             </ReactModal>
             <div>
               <h5 className="">
-                Customer is due a refund of ${this.state.refundAmount}.
+                Customer is due a refund of ${this.calculateRefund()}.
               </h5>
             </div>
           </div>
@@ -394,7 +400,8 @@ class Calculator extends Component {
                 <div>
                   <h5>Order # {mostRecentSearch} ({orderData.status})</h5>
                   <OrderTable orderData={orderData}
-                    grabGrandTotal={this.grabGrandTotal}
+                    originalGrandTotal={originalGrandTotal}
+                    componentWillReceiveProps={this.componentWillReceiveProps}
                   />
                 </div>
                 )

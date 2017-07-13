@@ -46,8 +46,6 @@ const OrderEdit = ({refundOrderData, handleEditClick, grabGrandTotal}) => {
   let salesTax = +total_tax ? coupontotal((subTotal - couponTotal), 8) : format(total_tax);
   let grandTotal = format(+subTotal - +couponTotal + +salesTax + +shipping_cost_inc_tax);
 
-  grabGrandTotal({refundTotal: grandTotal})
-
   return (
     <div>
       <table>

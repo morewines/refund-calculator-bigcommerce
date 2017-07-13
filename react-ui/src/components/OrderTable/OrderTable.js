@@ -9,7 +9,7 @@ import OrderRow from './OrderRow/OrderRow';
 //lib
 import { format, total } from '../../lib/currency';
 
-const OrderTable = ({orderData, grabGrandTotal}) => {
+const OrderTable = ({ orderData, originalGrandTotal }) => {
 
   const {
     coupons,
@@ -32,10 +32,6 @@ const OrderTable = ({orderData, grabGrandTotal}) => {
       <OrderRow key={i} product={product} />
     )
   })
-
-  let grandTotal = total([subtotal_ex_tax, shipping_cost_inc_tax, total_tax], coupon_discount)
-
-  grabGrandTotal({originalTotal: grandTotal});
 
   return (
     <div>
@@ -103,7 +99,7 @@ const OrderTable = ({orderData, grabGrandTotal}) => {
               <div className="clearfix order-total">
                 <div className="float-left order-dollar"><b>$</b></div>
                 <span className="float-right">
-                  <b>{format(grandTotal)}</b>
+                  <b>{format(originalGrandTotal)}</b>
                 </span>
               </div>
             </td>
