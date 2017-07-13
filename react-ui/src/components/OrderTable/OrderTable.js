@@ -9,7 +9,7 @@ import OrderRow from './OrderRow/OrderRow';
 //lib
 import { format, total } from '../../lib/currency';
 
-const OrderTable = ({orderData}) => {
+const OrderTable = ({orderData, grabGrandTotal}) => {
 
   const {
     coupons,
@@ -34,6 +34,8 @@ const OrderTable = ({orderData}) => {
   })
 
   let grandTotal = total([subtotal_ex_tax, shipping_cost_inc_tax, total_tax], coupon_discount)
+
+  grabGrandTotal({originalTotal: grandTotal});
 
   return (
     <div>

@@ -33,7 +33,10 @@ class Calculator extends Component {
       substituteItemName: '',
       substituteItemPrice: '',
       substituteItemQty: '1',
-      updateShippingCost: ''
+      updateShippingCost: '',
+      refundAmount: '0',
+      orderGrandTotal: '0',
+      refundGrandTotal: '0'
     }
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -48,6 +51,7 @@ class Calculator extends Component {
     this.handleReset = this.handleReset.bind(this);
     this.handleShippingCostUpdate = this.handleShippingCostUpdate.bind(this);
     this.handleShippingSubmit = this.handleShippingSubmit.bind(this);
+    this.grabGrandTotal = this.grabGrandTotal.bind(this);
   }
 
   getOrder(searchValue) {
@@ -241,6 +245,29 @@ class Calculator extends Component {
     })
   }
 
+  grabGrandTotal(total) {
+    // if (total.originalTotal) {
+    //   this.setState({
+    //     originalGrandTotal: total.originalTotal
+    //   })
+    // }
+    // else {
+    //   this.setState({
+    //     refundGrandTotal: total.refundTotal
+    //   })
+    // }
+    console.log(total);
+  }
+
+  calculateRefund() {
+    let {
+      originalGrandTotal,
+      refundGrandTotal
+    } = this.state;
+
+    console.log(originalGrandTotal, refundGrandTotal);
+  }
+
   render() {
     const { searchValue, fetching,
       searchPlaceholder, orderData,
@@ -350,6 +377,11 @@ class Calculator extends Component {
                 handleShippingSubmit={this.handleShippingSubmit}
               />
             </ReactModal>
+            <div>
+              <h5 className="">
+                Customer is due a refund of ${this.state.refundAmount}.
+              </h5>
+            </div>
           </div>
         )}
 
@@ -361,7 +393,9 @@ class Calculator extends Component {
                 ) : (
                 <div>
                   <h5>Order # {mostRecentSearch} ({orderData.status})</h5>
-                  <OrderTable orderData={orderData} />
+                  <OrderTable orderData={orderData}
+                    grabGrandTotal={this.grabGrandTotal}
+                  />
                 </div>
                 )
               }
@@ -377,6 +411,7 @@ class Calculator extends Component {
                   <OrderEdit
                     refundOrderData={refundOrderData}
                     handleEditClick={this.handleEditClick}
+                    grabGrandTotal={this.grabGrandTotal}
                   />
                 </div>
                 )

@@ -9,7 +9,7 @@ import RefundRow from './RefundRow/RefundRow';
 //lib
 import { format, subtotal, coupontotal } from '../../lib/currency';
 
-const OrderEdit = ({refundOrderData, handleEditClick}) => {
+const OrderEdit = ({refundOrderData, handleEditClick, grabGrandTotal}) => {
 
   const {
     coupons,
@@ -45,6 +45,8 @@ const OrderEdit = ({refundOrderData, handleEditClick}) => {
   //can reuse coupontotal helper, just passing in 8% for tax
   let salesTax = +total_tax ? coupontotal((subTotal - couponTotal), 8) : format(total_tax);
   let grandTotal = format(+subTotal - +couponTotal + +salesTax + +shipping_cost_inc_tax);
+
+  grabGrandTotal({refundTotal: grandTotal})
 
   return (
     <div>

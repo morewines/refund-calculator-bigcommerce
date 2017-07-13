@@ -36,6 +36,10 @@
   border-color: #d1d1d1;
 }
 
+.refund-title {
+  font-weight: 700;
+}
+
 tbody > tr:last-child > td {
   border-bottom: 0;
 }
