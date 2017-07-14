@@ -7,16 +7,17 @@ import './OrderEdit.css';
 import RefundRow from './RefundRow/RefundRow';
 
 //lib
-import { format, subtotal, coupontotal } from '../../lib/currency';
+import { format } from '../../lib/currency';
 
-const OrderEdit = ({refundOrderData, handleEditClick, grabGrandTotal}) => {
+const OrderEdit = ({
+    refundOrderData, handleEditClick,
+    editSubTotal, editCouponTotal,
+    editSalesTax, editGrandTotal
+  }) => {
 
   const {
     coupons,
-    coupon_discount,
-    coupon_rate,
     shipping_cost_inc_tax,
-    total_tax,
     refunded_amount,
     products
   } = refundOrderData;
@@ -36,15 +37,6 @@ const OrderEdit = ({refundOrderData, handleEditClick, grabGrandTotal}) => {
        />
     )
   })
-  let subTotal = subtotal(products);
-
-  //if coupon exists, calculate it dynamically, else display existing bc api data
-  let couponTotal = +coupon_discount ? coupontotal(subTotal, coupon_rate) : format(coupon_discount);
-
-  //if sales tax exists, calculate it dynamically, else display existing bc api data
-  //can reuse coupontotal helper, just passing in 8% for tax
-  let salesTax = +total_tax ? coupontotal((subTotal - couponTotal), 8) : format(total_tax);
-  let grandTotal = format(+subTotal - +couponTotal + +salesTax + +shipping_cost_inc_tax);
 
   return (
     <div>
@@ -72,13 +64,13 @@ const OrderEdit = ({refundOrderData, handleEditClick, grabGrandTotal}) => {
               <div className="clearfix">
                 <span className="float-left order-dollar order-price">$</span>
                 <span className="float-right">
-                  {subTotal}
+                  {editSubTotal}
                 </span>
               </div>
               <div className="clearfix">
                 <span className="float-left order-dollar order-price">$</span>
                 <span className="float-right">
-                  {couponTotal}
+                  {editCouponTotal}
                 </span>
               </div>
               <div className="clearfix">
@@ -90,7 +82,7 @@ const OrderEdit = ({refundOrderData, handleEditClick, grabGrandTotal}) => {
               <div className="clearfix">
                 <span className="float-left order-dollar order-price">$</span>
                 <span className="float-right">
-                  {salesTax}
+                  {editSalesTax}
                 </span>
               </div>
               <div className="clearfix">
@@ -102,7 +94,7 @@ const OrderEdit = ({refundOrderData, handleEditClick, grabGrandTotal}) => {
               <div className="clearfix order-total">
                 <div className="float-left order-dollar order-price"><b>$</b></div>
                 <span className="float-right">
-                  <b>{grandTotal}</b>
+                  <b>{editGrandTotal}</b>
                 </span>
               </div>
             </td>

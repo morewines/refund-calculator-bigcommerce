@@ -23,7 +23,7 @@
 }
 
 .calc-button-wrap {
-  margin: -1.5em 0 1em;
+  margin: -1.5em 0 -.5em;
 }
 
 .calc-button-top {
@@ -40,8 +40,39 @@
   font-weight: 700;
 }
 
+.refund-amount-heading {
+  margin: .55em 0 -1.85em;
+}
+
+.refund-price {
+  font-weight: 600;
+}
+
 tbody > tr:last-child > td {
   border-bottom: 0;
+}
+
+
+tr:nth-child(odd) {
+  background: rgba(144, 144, 144, 0.05);
+}
+
+tr:nth-child(odd) > td > a {
+  background: rgba(255, 242, 242, 0);
+  border-color: rgba(255, 242, 242, 0);
+}
+
+tr:nth-child(odd) > td > a:hover {
+  background: rgba(255, 242, 242, 0);
+  border-color: rgba(255, 242, 242, 0);
+}
+
+tr:last-child {
+  background: #fff
+}
+
+th {
+  background: #fff;
 }
 
 /* Only mobile screen */
@@ -64,7 +95,7 @@ tbody > tr:last-child > td {
   }
 
   .search-wrap {
-    margin: 3em auto;
+    margin: 2em auto;
   }
 
   th:last-child, td:last-child {

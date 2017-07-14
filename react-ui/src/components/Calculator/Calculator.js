@@ -38,7 +38,15 @@ class Calculator extends Component {
       substituteItemPrice: '',
       substituteItemQty: '1',
       updateShippingCost: '',
-      originalGrandTotal: ''
+      //orderTable
+      originalGrandTotal: '',
+      //editTable
+      editSubTotal: '',
+      editCouponTotal: '',
+      editSalesTax: '',
+      editGrandTotal: '',
+      //refundAmount
+      refundAmount: ''
     }
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
@@ -72,13 +80,18 @@ class Calculator extends Component {
             refundOrderData: JSON.parse(JSON.stringify(res.body.assembledOrder)),
             copyOriginalData: JSON.parse(JSON.stringify(res.body.assembledOrder)),
             fetching: false
+          }, () => {
+            if (this.state.orderData !== 404) {
+              this.calculateOriginalTotal();
+              this.calculateEditTotals();
+            }
           })
-          this.calculateOriginalTotal();
         }
       })
   }
 
   handleSearchChange(evt) {
+    evt.preventDefault();
     this.setState({
       searchValue: evt.target.value
     })
@@ -89,8 +102,9 @@ class Calculator extends Component {
     if (this.state.searchValue.length > 0) {
       this.setState({
         fetching: true
+      }, () => {
+        this.getOrder(this.state.searchValue);
       })
-      this.getOrder(this.state.searchValue);
     }
     else {
       this.setState({
@@ -102,6 +116,8 @@ class Calculator extends Component {
   handleEditClick(updatedRefundData) {
     this.setState({
       refundOrderData: updatedRefundData
+    }, () => {
+      this.calculateEditTotals();
     })
   }
 
@@ -180,6 +196,8 @@ class Calculator extends Component {
       substituteItemName: '',
       substituteItemPrice: '',
       substituteItemQty: '1'
+    }, () => {
+      this.calculateEditTotals();
     })
   }
 
@@ -213,6 +231,8 @@ class Calculator extends Component {
     this.setState({
       refundOrderData: JSON.parse(JSON.stringify(this.state.copyOriginalData)),
       orderData: JSON.parse(JSON.stringify(this.state.copyOriginalData))
+    }, () => {
+      this.calculateEditTotals();
     })
   }
 
@@ -222,7 +242,7 @@ class Calculator extends Component {
     const name = evt.target.name;
     let value = evt.target.value;
 
-    if (+value > 0 || value === '') {
+    if (+value >= 0 || value === '') {
       this.setState({
         [name]: value
       })
@@ -244,6 +264,8 @@ class Calculator extends Component {
       refundOrderData: JSON.parse(JSON.stringify(newRefundOrderData)),
       updateShippingCost: '',
       showShippingModal: false
+    }, () => {
+      this.calculateEditTotals();
     })
   }
 
@@ -262,22 +284,52 @@ class Calculator extends Component {
     })
   }
 
+  calculateEditTotals() {
+    const {
+      coupon_discount,
+      coupon_rate,
+      shipping_cost_inc_tax,
+      total_tax,
+      products
+    } = this.state.refundOrderData;
+
+    let editSubTotal = subtotal(products);
+    //if coupon exists, calculate it dynamically, else display existing bc api data
+    let editCouponTotal = +coupon_discount ? coupontotal(editSubTotal, coupon_rate) : format(coupon_discount);
+    //if sales tax exists, calculate it dynamically, else display existing bc api data
+    //can reuse coupontotal helper, just passing in 8% for tax
+    let editSalesTax = +total_tax ? coupontotal((editSubTotal - editCouponTotal), 8) : format(total_tax);
+    let editGrandTotal = format(+editSubTotal - +editCouponTotal + +editSalesTax + +shipping_cost_inc_tax);
+
+    this.setState({
+      editSubTotal,
+      editCouponTotal,
+      editSalesTax,
+      editGrandTotal
+    }, () => {
+      this.calculateRefund();
+    })
+  }
+
   calculateRefund() {
     const {
-      originalGrandTotal
+      originalGrandTotal,
+      editGrandTotal
     } = this.state;
 
-    let refund = originalGrandTotal;
-    return refund;
+    let refundAmount = format(+originalGrandTotal - +editGrandTotal);
+    this.setState({
+      refundAmount
+    })
   }
 
   render() {
-    console.log(this.state);
-
     const { searchValue, fetching,
       searchPlaceholder, orderData,
       mostRecentSearch, refundOrderData,
-      originalGrandTotal } = this.state;
+      originalGrandTotal, editSubTotal,
+      editCouponTotal, editSalesTax,
+      editGrandTotal } = this.state;
 
     const substituteModalStyle = {
       overlay: {
@@ -288,7 +340,8 @@ class Calculator extends Component {
         height: '37.2rem',
         margin: 'auto',
         width: '90rem',
-        maxWidth: '80%'
+        maxWidth: '80%',
+        overflow: 'hidden'
       }
     }
 
@@ -301,7 +354,8 @@ class Calculator extends Component {
         height: '26.2rem',
         margin: 'auto',
         width: '90rem',
-        maxWidth: '80%'
+        maxWidth: '80%',
+        overflow: 'hidden'
       }
     }
 
@@ -317,7 +371,6 @@ class Calculator extends Component {
             handleSearchSubmit={this.handleSearchSubmit}
             fetching={fetching}
             searchPlaceholder={searchPlaceholder}
-
           />
         </div>
         { (refundOrderData == null || refundOrderData === 404) || fetching ? (
@@ -384,10 +437,13 @@ class Calculator extends Component {
               />
             </ReactModal>
             <div>
-              <h5 className="">
-                Customer is due a refund of ${this.calculateRefund()}.
+              <h5 className="refund-amount-heading">
+                Customer is due a refund of
+                $ <span className="refund-price">{this.state.refundAmount}</span>
+                .
               </h5>
             </div>
+            <hr className="divider" />
           </div>
         )}
 
@@ -418,7 +474,10 @@ class Calculator extends Component {
                   <OrderEdit
                     refundOrderData={refundOrderData}
                     handleEditClick={this.handleEditClick}
-                    grabGrandTotal={this.grabGrandTotal}
+                    editSubTotal={editSubTotal}
+                    editCouponTotal={editCouponTotal}
+                    editSalesTax={editSalesTax}
+                    editGrandTotal={editGrandTotal}
                   />
                 </div>
                 )

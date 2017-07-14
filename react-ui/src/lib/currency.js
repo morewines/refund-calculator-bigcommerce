@@ -1,5 +1,10 @@
+// https://stackoverflow.com/questions/10015027/javascript-tofixed-not-rounding
+function toFixed10( num, precision ) {
+  return (+(Math.round(+(num + 'e' + precision)) + 'e' + -precision)).toFixed(precision);
+}
+
 function format(str) {
-  return parseFloat(str).toFixed(2);
+  return toFixed10(parseFloat(str), 2);
 }
 
 function total(numArr, coupon) {
