@@ -438,8 +438,19 @@ class Calculator extends Component {
             </ReactModal>
             <div>
               <h5 className="refund-amount-heading">
-                Customer is due a refund of
-                $ <span className="refund-price">{this.state.refundAmount}</span>
+                Customer { +this.state.refundAmount >= 0 ? (
+                    <span>is due a <b>REFUND</b> of </span>
+                  ) : (
+                    <span>needs to <b>PAY</b> an additional </span>
+                  )
+                }
+                $ <span className="refund-price">{
+                  +this.state.refundAmount >= 0 ? (
+                      this.state.refundAmount
+                    ) : (
+                      this.state.refundAmount * -1
+                    )
+                }</span>
                 .
               </h5>
             </div>
