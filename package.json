@@ -6,6 +6,7 @@
     "node": "7.10.1"
   },
   "scripts": {
+    "precommit": "lint-staged",
     "start": "node api/server",
     "heroku-postbuild": "cd react-ui/ && npm install --only=dev && npm install && npm run build"
   },
@@ -20,10 +21,24 @@
     "morgan": "^1.8.2",
     "request": "^2.81.0"
   },
+  "lint-staged": {
+    "react-ui/src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ],
+    "api/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/morewines/refund-calculator-bigcommerce.git"
   },
   "license": "GPL-3.0",
-  "devDependencies": {}
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.3",
+    "prettier": "^1.7.4"
+  }
 }
