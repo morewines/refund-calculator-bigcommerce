@@ -16,9 +16,6 @@ const headers = {
 
 /**
  * Helper for finding specific order from bc api
- * @param  {number}   orderID  [description]
- * @param  {Function} callback [description]
- * @return {object}            [description]
  */
 function findOrder(orderID, callback) {
   const options = {
@@ -26,7 +23,7 @@ function findOrder(orderID, callback) {
     headers: headers
   }
 
-  //send request to bc orders api
+  // send request to bc orders api
   request(options, (err, res, body) => {
     if (res.statusCode !== 200) {
       callback(res.statusCode)
@@ -34,30 +31,30 @@ function findOrder(orderID, callback) {
     if (!err && res.statusCode == 200) {
       const orderData = JSON.parse(body);
 
-      //populate order products
+      // populate order products
       populateOrder(orderData.products.url, (productsData) => {
         orderData.products = productsData;
 
-        //populate order shipping address
+        // populate order shipping address
         populateOrder(orderData.shipping_addresses.url, (shippingData) => {
-          //order only ever have one shipping address, array[0]
+          // order only ever have one shipping address, array[0]
           orderData.shipping_addresses = shippingData[0];
 
-          //populate order coupon if coupon_discount present
+          // populate order coupon if coupon_discount present
           populateOrder(orderData.coupons.url, (couponData) => {
             if (couponData) {
-              //order only ever have one coupon, array[0]
+              // order only ever have one coupon, array[0]
               orderData.coupons = couponData[0];
             }
 
-            //assemble important data from order
+            // assemble important data from order
             assemble.order(orderData, (assembledOrder) => {
 
-              //get urls for each product
+              // get urls for each product
               populateSku(assembledOrder.products, (updatedProducts) => {
                 assembledOrder.products = updatedProducts;
 
-                //send back to route
+                // send back to route
                 callback(assembledOrder);
               })
             })
@@ -74,7 +71,7 @@ function populateOrder(populateUrl, callback) {
     headers: headers
   }
 
-  //send products to bc orders api
+  // send products to bc orders api
   request(options, (err, res, body) => {
     if (!err && res.statusCode == 200) {
       const populatedData = JSON.parse(body);
@@ -87,7 +84,7 @@ function populateOrder(populateUrl, callback) {
 }
 
 function populateSku(productArr, callback) {
-  //use recursion to turn sending looped requests to bc api synchronous
+  // use recursion to turn sending looped requests to bc api synchronous
   skuGrabber(0, productArr, (updatedProductsArr) => {
     callback(updatedProductsArr)
   })
@@ -98,12 +95,12 @@ function skuGrabber(i, productArr, callback) {
     let sku = productArr[i].sku;
     let skuUrl = `${BC_PATH_V3}/catalog/products?sku=${sku}`;
 
-    //urls for products are stored in a different bc api call
+    // urls for products are stored in a different bc api call
     populateOrder(skuUrl, (skuData) => {
-      //extract sku url
+      // extract sku url
       productArr[i].url = skuData.data[0].custom_url.url;
 
-      //recursively call again
+      // recursively call again
       skuGrabber(i+1, productArr, callback);
     })
   }

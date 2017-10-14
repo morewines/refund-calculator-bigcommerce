@@ -1,7 +1,7 @@
 const express = require('express'),
       router = express.Router();
 
-//lib
+// lib
 const access = require('../lib/access'),
       bigCommerce = require('../lib/bigCommerce');
 
@@ -14,13 +14,13 @@ router.get('/:orderID', (req, res, next) => {
   const orderID = req.params.orderID,
         accessValue = req.query.accessValue;
 
-  //check if client has correct access code
+  // check if client has correct access code
   access.check(accessValue, (status) => {
     if (status !== 200) {
       res.json(403)
     }
     else {
-      //retrieve order from bc api
+      // retrieve order from bc api
       bigCommerce.findOrder(orderID, (assembledOrder) => {
         res.json({assembledOrder})
       })

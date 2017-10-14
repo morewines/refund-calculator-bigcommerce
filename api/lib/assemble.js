@@ -1,6 +1,5 @@
 function order(orderData, callback) {
-  console.log(orderData);
-  //destructure orderData
+  // destructure orderData
   const {
     coupon_discount,
     coupons,
@@ -16,7 +15,7 @@ function order(orderData, callback) {
     refunded_amount
   } = orderData;
 
-  //assemble important info
+  // assemble important info
   const assembledOrder = {
     coupon_discount,
     status,
@@ -34,17 +33,18 @@ function order(orderData, callback) {
     refunded_amount
   };
 
-  //add coupon code and rate of coupon if exist
+  // add coupon code and rate of coupon if exist
   if (coupons.code) {
     assembledOrder.coupons = coupons.code;
     assembledOrder.coupon_rate = coupons.amount;
   }
 
-  //assemble products array info
+  // assemble products array info
   assembleProducts(products, (assembledProducts) => {
-    //replace assembled products array to rest of order
+    // replace assembled products array to rest of order
     assembledOrder.products = assembledProducts;
-    //send order info back
+
+    // send order info back
     callback(assembledOrder);
   })
 }

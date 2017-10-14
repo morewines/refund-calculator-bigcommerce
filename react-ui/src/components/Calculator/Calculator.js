@@ -38,13 +38,16 @@ class Calculator extends Component {
       substituteItemPrice: '',
       substituteItemQty: '1',
       updateShippingCost: '',
+
       //orderTable
       originalGrandTotal: '',
+
       //editTable
       editSubTotal: '',
       editCouponTotal: '',
       editSalesTax: '',
       editGrandTotal: '',
+
       //refundAmount
       refundAmount: ''
     }
@@ -139,7 +142,7 @@ class Calculator extends Component {
       }
     }
     else if (name === 'substituteItemPrice') {
-      //value has to be positive or blank
+      // value has to be positive or blank
       if (+value > 0 || value === '') {
         this.setState({
           [name]: value
@@ -294,8 +297,10 @@ class Calculator extends Component {
     } = this.state.refundOrderData;
 
     let editSubTotal = subtotal(products);
+
     //if coupon exists, calculate it dynamically, else display existing bc api data
     let editCouponTotal = +coupon_discount ? coupontotal(editSubTotal, coupon_rate) : format(coupon_discount);
+
     //if sales tax exists, calculate it dynamically, else display existing bc api data
     //can reuse coupontotal helper, just passing in 8% for tax
     let editSalesTax = +total_tax ? coupontotal((editSubTotal - editCouponTotal), 8) : format(total_tax);

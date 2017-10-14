@@ -7,19 +7,18 @@ const express = require('express'),
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-//Config
-//
+// config
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// Priority serve any static files.
+
+// priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-//Routes
-
+// routes
 app.use('/api/orders', require('./routes/orders'));
 
-// All remaining requests return the React app, so it can handle routing.
+// all remaining requests return to react for client routing
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
 });
