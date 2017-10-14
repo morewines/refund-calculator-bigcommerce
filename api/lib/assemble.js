@@ -24,7 +24,7 @@ function order(orderData, callback) {
     shipping_addresses: {
       state,
       zip,
-      shipping_method,
+      shipping_method
     },
     subtotal_ex_tax,
     total_tax,
@@ -40,19 +40,18 @@ function order(orderData, callback) {
   }
 
   // assemble products array info
-  assembleProducts(products, (assembledProducts) => {
+  assembleProducts(products, assembledProducts => {
     // replace assembled products array to rest of order
     assembledOrder.products = assembledProducts;
 
     // send order info back
     callback(assembledOrder);
-  })
+  });
 }
 
 function assembleProducts(products, callback) {
   let assembledProducts = [];
   for (let i = 0; i < products.length; i++) {
-
     const {
       price_ex_tax,
       total_ex_tax,
@@ -82,4 +81,4 @@ function assembleProducts(products, callback) {
 
 module.exports = {
   order
-}
+};

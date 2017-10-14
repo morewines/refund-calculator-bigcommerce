@@ -1,44 +1,40 @@
 import React from 'react';
 
-//CSS
+// CSS
 import './RefundRow.css';
 
-//Modules
+// Modules
 import MathButton from '../MathButton/MathButton';
 import FaPlus from 'react-icons/lib/fa/plus';
 import FaMinus from 'react-icons/lib/fa/minus';
 
-//lib
+// lib
 import { format } from '../../../lib/currency';
 
-const RefundRow = ({product, handleUpdateMathData, index}) => {
+const RefundRow = ({ product, handleUpdateMathData, index }) => {
   const { quantity, price_ex_tax } = product;
 
   const handleSubtract = () => {
-    //make copy to fix some weird orderData & refundOrderData bug
+    // make copy to fix some weird orderData & refundOrderData bug
     let updatedProduct = JSON.parse(JSON.stringify(product));
     if (updatedProduct.quantity > 0) {
       updatedProduct.quantity--;
     }
     handleUpdateMathData(updatedProduct, index);
-  }
+  };
 
   const handleAdd = () => {
-    //make copy to fix some weird orderData & refundOrderData bug
+    // make copy to fix some weird orderData & refundOrderData bug
     let updatedProduct = JSON.parse(JSON.stringify(product));
     updatedProduct.quantity++;
     handleUpdateMathData(updatedProduct, index);
-  }
+  };
 
   return (
     <tr>
       <td>
-        <MathButton
-          handleMath={handleAdd}
-          buttonText={<FaPlus />} />
-        <MathButton
-          handleMath={handleSubtract}
-          buttonText={<FaMinus />} />
+        <MathButton handleMath={handleAdd} buttonText={<FaPlus />} />
+        <MathButton handleMath={handleSubtract} buttonText={<FaMinus />} />
       </td>
       <td className="order-table-center">{quantity}</td>
       <td className="order-table-center order-price">
@@ -50,7 +46,7 @@ const RefundRow = ({product, handleUpdateMathData, index}) => {
         <span className="float-right">{format(quantity * price_ex_tax)}</span>
       </td>
     </tr>
-  )
-}
+  );
+};
 
 export default RefundRow;

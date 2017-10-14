@@ -1,12 +1,12 @@
 import React from 'react';
 
-//CSS
+// CSS
 import './OrderRow.css';
 
-//lib
+// lib
 import { format } from '../../../lib/currency';
 
-const OrderRow = ({product}) => {
+const OrderRow = ({ product }) => {
   const { name, quantity, price_ex_tax, url, sku, weight } = product;
 
   return (
@@ -14,10 +14,11 @@ const OrderRow = ({product}) => {
       <td>
         <div className="truncate">
           <div className="truncated">
-            <a href={`https://morewines.com${url}`} target="_blank">{name}</a>
+            <a href={`https://morewines.com${url}`} target="_blank">
+              {name}
+            </a>
           </div>
-          <div className="spacer">
-          </div>
+          <div className="spacer" />
           <span>&nbsp;</span>
         </div>
       </td>
@@ -33,7 +34,7 @@ const OrderRow = ({product}) => {
         <span className="float-right">{format(quantity * price_ex_tax)}</span>
       </td>
     </tr>
-  )
-}
+  );
+};
 
 export default OrderRow;

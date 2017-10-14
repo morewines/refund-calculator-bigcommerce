@@ -7,13 +7,12 @@ const accessKey = process.env.ACCESS_KEY;
  */
 function check(accessValue, callback) {
   if (accessKey !== accessValue) {
-    callback(403)
-  }
-  else {
-    callback(200)
+    callback(403);
+  } else {
+    callback(200);
   }
 }
 
 module.exports = {
   check
-}
+};

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import SuperAgent from 'superagent';
 import ReactModal from 'react-modal';
 
-//CSS
+// CSS
 import './Calculator.css';
 
-//Modules
+// Modules
 import Search from '../Search/Search';
 import Button from '../Button/Button';
 import OrderTable from '../OrderTable/OrderTable';
@@ -14,11 +14,10 @@ import AddSubstitute from '../AddSubstitute/AddSubstitute';
 import UpdateShipping from '../UpdateShipping/UpdateShipping';
 import FaPlus from 'react-icons/lib/fa/plus';
 import FaRefresh from 'react-icons/lib/fa/refresh';
-import FaEdit from 'react-icons/lib/fa/edit'
+import FaEdit from 'react-icons/lib/fa/edit';
 
-//lib
-import { format, total,
-  subtotal, coupontotal } from '../../lib/currency';
+// lib
+import { format, total, subtotal, coupontotal } from '../../lib/currency';
 
 class Calculator extends Component {
   constructor() {
@@ -39,18 +38,18 @@ class Calculator extends Component {
       substituteItemQty: '1',
       updateShippingCost: '',
 
-      //orderTable
+      // orderTable
       originalGrandTotal: '',
 
-      //editTable
+      // editTable
       editSubTotal: '',
       editCouponTotal: '',
       editSalesTax: '',
       editGrandTotal: '',
 
-      //refundAmount
+      // refundAmount
       refundAmount: ''
-    }
+    };
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
@@ -58,8 +57,12 @@ class Calculator extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleCloseShippingModal = this.handleCloseShippingModal.bind(this);
     this.handleOpenShippingModal = this.handleOpenShippingModal.bind(this);
-    this.handleSubstituteWeightChange = this.handleSubstituteWeightChange.bind(this);
-    this.handleSubstituteInputChange = this.handleSubstituteInputChange.bind(this);
+    this.handleSubstituteWeightChange = this.handleSubstituteWeightChange.bind(
+      this
+    );
+    this.handleSubstituteInputChange = this.handleSubstituteInputChange.bind(
+      this
+    );
     this.handleSubstituteSubmit = this.handleSubstituteSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.handleShippingCostUpdate = this.handleShippingCostUpdate.bind(this);
@@ -67,67 +70,77 @@ class Calculator extends Component {
   }
 
   getOrder(searchValue) {
-    SuperAgent
-      .get(`/api/orders/${searchValue}`)
+    SuperAgent.get(`/api/orders/${searchValue}`)
       .query({ accessValue: this.props.accessValue })
-      .end( (err, res) => {
+      .end((err, res) => {
         if (err || !res.ok) {
           console.log(res.body);
-        }
-        else {
-          this.setState({
-            mostRecentSearch: this.state.searchValue,
-            searchValue: '',
-            searchPlaceholder: 'Order #',
-            orderData: res.body.assembledOrder,
-            refundOrderData: JSON.parse(JSON.stringify(res.body.assembledOrder)),
-            copyOriginalData: JSON.parse(JSON.stringify(res.body.assembledOrder)),
-            fetching: false
-          }, () => {
-            if (this.state.orderData !== 404) {
-              this.calculateOriginalTotal();
-              this.calculateEditTotals();
+        } else {
+          this.setState(
+            {
+              mostRecentSearch: this.state.searchValue,
+              searchValue: '',
+              searchPlaceholder: 'Order #',
+              orderData: res.body.assembledOrder,
+              refundOrderData: JSON.parse(
+                JSON.stringify(res.body.assembledOrder)
+              ),
+              copyOriginalData: JSON.parse(
+                JSON.stringify(res.body.assembledOrder)
+              ),
+              fetching: false
+            },
+            () => {
+              if (this.state.orderData !== 404) {
+                this.calculateOriginalTotal();
+                this.calculateEditTotals();
+              }
             }
-          })
+          );
         }
-      })
+      });
   }
 
   handleSearchChange(evt) {
     evt.preventDefault();
     this.setState({
       searchValue: evt.target.value
-    })
+    });
   }
 
   handleSearchSubmit(evt) {
     evt.preventDefault();
     if (this.state.searchValue.length > 0) {
-      this.setState({
-        fetching: true
-      }, () => {
-        this.getOrder(this.state.searchValue);
-      })
-    }
-    else {
+      this.setState(
+        {
+          fetching: true
+        },
+        () => {
+          this.getOrder(this.state.searchValue);
+        }
+      );
+    } else {
       this.setState({
         searchPlaceholder: 'Order # required'
-      })
+      });
     }
   }
 
   handleEditClick(updatedRefundData) {
-    this.setState({
-      refundOrderData: updatedRefundData
-    }, () => {
-      this.calculateEditTotals();
-    })
+    this.setState(
+      {
+        refundOrderData: updatedRefundData
+      },
+      () => {
+        this.calculateEditTotals();
+      }
+    );
   }
 
   handleSubstituteWeightChange(evt) {
     this.setState({
       substituteValue: evt.target.value
-    })
+    });
   }
 
   handleSubstituteInputChange(evt) {
@@ -135,24 +148,22 @@ class Calculator extends Component {
     let value = evt.target.value;
     if (name === 'substituteItemQty') {
       // if number of value is positive or is blank AND doesn't include .
-      if ( (+value > 0 || value === '') && !value.includes('.') ) {
+      if ((+value > 0 || value === '') && !value.includes('.')) {
         this.setState({
           [name]: value
-        })
+        });
       }
-    }
-    else if (name === 'substituteItemPrice') {
+    } else if (name === 'substituteItemPrice') {
       // value has to be positive or blank
       if (+value > 0 || value === '') {
         this.setState({
           [name]: value
-        })
+        });
       }
-    }
-    else {
+    } else {
       this.setState({
         [name]: evt.target.value
-      })
+      });
     }
   }
 
@@ -173,7 +184,7 @@ class Calculator extends Component {
       name: substituteItemName,
       price_ex_tax: substituteItemPrice,
       quantity: +substituteItemQty
-    }
+    };
 
     let originalOrderSubstituteItem = {
       weight: substituteItemWeight,
@@ -182,7 +193,7 @@ class Calculator extends Component {
       quantity: 0,
       sku: 'n/a',
       url: '/'
-    }
+    };
 
     this.handleCloseModal();
 
@@ -192,51 +203,59 @@ class Calculator extends Component {
     let newOrderData = orderData;
     newOrderData.products.push(originalOrderSubstituteItem);
 
-    this.setState({
-      refundOrderData: newRefundOrderData,
-      orderData: newOrderData,
-      substituteItemWeight: '3.5',
-      substituteItemName: '',
-      substituteItemPrice: '',
-      substituteItemQty: '1'
-    }, () => {
-      this.calculateEditTotals();
-    })
+    this.setState(
+      {
+        refundOrderData: newRefundOrderData,
+        orderData: newOrderData,
+        substituteItemWeight: '3.5',
+        substituteItemName: '',
+        substituteItemPrice: '',
+        substituteItemQty: '1'
+      },
+      () => {
+        this.calculateEditTotals();
+      }
+    );
   }
 
   handleCloseModal() {
     this.setState({
       showModal: false
-    })
+    });
   }
 
   handleOpenModal() {
     this.setState({
       showModal: true
-    })
+    });
   }
 
   handleCloseShippingModal() {
     this.setState({
       showShippingModal: false
-    })
+    });
   }
 
   handleOpenShippingModal() {
     this.setState({
       showShippingModal: true
-    })
+    });
   }
 
   handleReset(evt) {
     evt.preventDefault();
 
-    this.setState({
-      refundOrderData: JSON.parse(JSON.stringify(this.state.copyOriginalData)),
-      orderData: JSON.parse(JSON.stringify(this.state.copyOriginalData))
-    }, () => {
-      this.calculateEditTotals();
-    })
+    this.setState(
+      {
+        refundOrderData: JSON.parse(
+          JSON.stringify(this.state.copyOriginalData)
+        ),
+        orderData: JSON.parse(JSON.stringify(this.state.copyOriginalData))
+      },
+      () => {
+        this.calculateEditTotals();
+      }
+    );
   }
 
   handleShippingCostUpdate(evt) {
@@ -248,28 +267,29 @@ class Calculator extends Component {
     if (+value >= 0 || value === '') {
       this.setState({
         [name]: value
-      })
+      });
     }
   }
 
   handleShippingSubmit(evt) {
     evt.preventDefault();
 
-    const {
-      refundOrderData, updateShippingCost
-    } = this.state;
+    const { refundOrderData, updateShippingCost } = this.state;
 
     let newRefundOrderData = refundOrderData;
 
     newRefundOrderData.shipping_cost_inc_tax = updateShippingCost;
 
-    this.setState({
-      refundOrderData: JSON.parse(JSON.stringify(newRefundOrderData)),
-      updateShippingCost: '',
-      showShippingModal: false
-    }, () => {
-      this.calculateEditTotals();
-    })
+    this.setState(
+      {
+        refundOrderData: JSON.parse(JSON.stringify(newRefundOrderData)),
+        updateShippingCost: '',
+        showShippingModal: false
+      },
+      () => {
+        this.calculateEditTotals();
+      }
+    );
   }
 
   calculateOriginalTotal() {
@@ -280,11 +300,14 @@ class Calculator extends Component {
       coupon_discount
     } = this.state.orderData;
 
-    let grandTotal = total([subtotal_ex_tax, shipping_cost_inc_tax, total_tax], coupon_discount);
+    let grandTotal = total(
+      [subtotal_ex_tax, shipping_cost_inc_tax, total_tax],
+      coupon_discount
+    );
 
     this.setState({
       originalGrandTotal: grandTotal
-    })
+    });
   }
 
   calculateEditTotals() {
@@ -299,42 +322,55 @@ class Calculator extends Component {
     let editSubTotal = subtotal(products);
 
     //if coupon exists, calculate it dynamically, else display existing bc api data
-    let editCouponTotal = +coupon_discount ? coupontotal(editSubTotal, coupon_rate) : format(coupon_discount);
+    let editCouponTotal = +coupon_discount
+      ? coupontotal(editSubTotal, coupon_rate)
+      : format(coupon_discount);
 
     //if sales tax exists, calculate it dynamically, else display existing bc api data
     //can reuse coupontotal helper, just passing in 8% for tax
-    let editSalesTax = +total_tax ? coupontotal((editSubTotal - editCouponTotal), 8) : format(total_tax);
-    let editGrandTotal = format(+editSubTotal - +editCouponTotal + +editSalesTax + +shipping_cost_inc_tax);
+    let editSalesTax = +total_tax
+      ? coupontotal(editSubTotal - editCouponTotal, 8)
+      : format(total_tax);
+    let editGrandTotal = format(
+      +editSubTotal - +editCouponTotal + +editSalesTax + +shipping_cost_inc_tax
+    );
 
-    this.setState({
-      editSubTotal,
-      editCouponTotal,
-      editSalesTax,
-      editGrandTotal
-    }, () => {
-      this.calculateRefund();
-    })
+    this.setState(
+      {
+        editSubTotal,
+        editCouponTotal,
+        editSalesTax,
+        editGrandTotal
+      },
+      () => {
+        this.calculateRefund();
+      }
+    );
   }
 
   calculateRefund() {
-    const {
-      originalGrandTotal,
-      editGrandTotal
-    } = this.state;
+    const { originalGrandTotal, editGrandTotal } = this.state;
 
     let refundAmount = format(+originalGrandTotal - +editGrandTotal);
     this.setState({
       refundAmount
-    })
+    });
   }
 
   render() {
-    const { searchValue, fetching,
-      searchPlaceholder, orderData,
-      mostRecentSearch, refundOrderData,
-      originalGrandTotal, editSubTotal,
-      editCouponTotal, editSalesTax,
-      editGrandTotal } = this.state;
+    const {
+      searchValue,
+      fetching,
+      searchPlaceholder,
+      orderData,
+      mostRecentSearch,
+      refundOrderData,
+      originalGrandTotal,
+      editSubTotal,
+      editCouponTotal,
+      editSalesTax,
+      editGrandTotal
+    } = this.state;
 
     const substituteModalStyle = {
       overlay: {
@@ -348,7 +384,7 @@ class Calculator extends Component {
         maxWidth: '80%',
         overflow: 'hidden'
       }
-    }
+    };
 
     const shippingModalStyle = {
       overlay: {
@@ -362,13 +398,19 @@ class Calculator extends Component {
         maxWidth: '80%',
         overflow: 'hidden'
       }
-    }
+    };
 
     return (
       <div className="container clearfix">
         <div className="search-wrap">
           <div className="search-not-found">
-            {orderData === 404 ? <p><sup>*</sup>Order not found</p> : ''}
+            {orderData === 404 ? (
+              <p>
+                <sup>*</sup>Order not found
+              </p>
+            ) : (
+              ''
+            )}
           </div>
           <Search
             searchValue={searchValue}
@@ -378,29 +420,39 @@ class Calculator extends Component {
             searchPlaceholder={searchPlaceholder}
           />
         </div>
-        { (refundOrderData == null || refundOrderData === 404) || fetching ? (
+        {refundOrderData == null || refundOrderData === 404 || fetching ? (
           ''
-          ) : (
+        ) : (
           <div className="center-text calc-button-wrap">
             <hr className="divider" />
             <Button
               extraClass="calc-button-top"
               buttonText="Reset Order"
               icon={
-                <FaRefresh size={18} className="fa-spin" style={{
-                  marginBottom: '3px',
-                  marginRight: '1em'
-              }}/>}
+                <FaRefresh
+                  size={18}
+                  className="fa-spin"
+                  style={{
+                    marginBottom: '3px',
+                    marginRight: '1em'
+                  }}
+                />
+              }
               handleClick={this.handleReset}
             />
             <Button
               extraClass="calc-button-top"
               buttonText="Add Substitute"
               icon={
-                <FaPlus size={18} className="fa-spin" style={{
-                  marginBottom: '3px',
-                  marginRight: '1em'
-                }}/>}
+                <FaPlus
+                  size={18}
+                  className="fa-spin"
+                  style={{
+                    marginBottom: '3px',
+                    marginRight: '1em'
+                  }}
+                />
+              }
               handleClick={this.handleOpenModal}
             />
             <ReactModal
@@ -423,10 +475,15 @@ class Calculator extends Component {
               extraClass=""
               buttonText="Update Shipping"
               icon={
-                <FaEdit size={18} className="fa-spin" style={{
-                  marginBottom: '3px',
-                  marginRight: '1em'
-              }}/>}
+                <FaEdit
+                  size={18}
+                  className="fa-spin"
+                  style={{
+                    marginBottom: '3px',
+                    marginRight: '1em'
+                  }}
+                />
+              }
               handleClick={this.handleOpenShippingModal}
             />
             <ReactModal
@@ -443,19 +500,22 @@ class Calculator extends Component {
             </ReactModal>
             <div>
               <h5 className="refund-amount-heading">
-                Customer { +this.state.refundAmount >= 0 ? (
-                    <span>is due a <b>REFUND</b> of </span>
-                  ) : (
-                    <span>needs to <b>PAY</b> an additional </span>
-                  )
-                }
-                $ <span className="refund-price">{
-                  +this.state.refundAmount >= 0 ? (
-                      this.state.refundAmount
-                    ) : (
-                      this.state.refundAmount * -1
-                    )
-                }</span>
+                Customer{' '}
+                {+this.state.refundAmount >= 0 ? (
+                  <span>
+                    is due a <b>REFUND</b> of{' '}
+                  </span>
+                ) : (
+                  <span>
+                    needs to <b>PAY</b> an additional{' '}
+                  </span>
+                )}
+                ${' '}
+                <span className="refund-price">
+                  {+this.state.refundAmount >= 0
+                    ? this.state.refundAmount
+                    : this.state.refundAmount * -1}
+                </span>
                 .
               </h5>
             </div>
@@ -466,25 +526,29 @@ class Calculator extends Component {
         <div className="row">
           <div className="column">
             <div className="calc-column-wrap">
-              { (orderData == null || orderData === 404) || fetching ? (
+              {orderData == null || orderData === 404 || fetching ? (
                 ''
-                ) : (
+              ) : (
                 <div>
-                  <h5>Order # {mostRecentSearch} ({orderData.status})</h5>
-                  <OrderTable orderData={orderData}
+                  <h5>
+                    Order # {mostRecentSearch} ({orderData.status})
+                  </h5>
+                  <OrderTable
+                    orderData={orderData}
                     originalGrandTotal={originalGrandTotal}
                     componentWillReceiveProps={this.componentWillReceiveProps}
                   />
                 </div>
-                )
-              }
+              )}
             </div>
           </div>
           <div className="column">
             <div className="calc-column-wrap">
-              { (refundOrderData == null || refundOrderData === 404) || fetching ? (
+              {refundOrderData == null ||
+              refundOrderData === 404 ||
+              fetching ? (
                 ''
-                ) : (
+              ) : (
                 <div>
                   <h5>Edit Order &#8212; What is the customer keeping?</h5>
                   <OrderEdit
@@ -496,14 +560,12 @@ class Calculator extends Component {
                     editGrandTotal={editGrandTotal}
                   />
                 </div>
-                )
-              }
+              )}
             </div>
           </div>
-
         </div>
       </div>
-    )
+    );
   }
 }
 

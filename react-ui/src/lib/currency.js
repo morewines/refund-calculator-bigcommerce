@@ -1,6 +1,8 @@
 // https://stackoverflow.com/questions/10015027/javascript-tofixed-not-rounding
-function toFixed10( num, precision ) {
-  return (+(Math.round(+(num + 'e' + precision)) + 'e' + -precision)).toFixed(precision);
+function toFixed10(num, precision) {
+  return (+(Math.round(+(num + 'e' + precision)) + 'e' + -precision)).toFixed(
+    precision
+  );
 }
 
 function format(str) {
@@ -30,9 +32,4 @@ function coupontotal(subTotal, couponRate) {
   return format(discountAmount);
 }
 
-export {
-  format,
-  total,
-  subtotal,
-  coupontotal
-};
+export { format, total, subtotal, coupontotal };

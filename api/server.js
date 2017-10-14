@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express'),
-      path = require('path'),
-      morgan = require('morgan'),
-      bodyParser = require('body-parser');
+  path = require('path'),
+  morgan = require('morgan'),
+  bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 5000;

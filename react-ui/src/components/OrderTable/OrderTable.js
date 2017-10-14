@@ -10,28 +10,21 @@ import OrderRow from './OrderRow/OrderRow';
 import { format } from '../../lib/currency';
 
 const OrderTable = ({ orderData, originalGrandTotal }) => {
-
   const {
     coupons,
     subtotal_ex_tax,
     coupon_discount,
     shipping_cost_inc_tax,
     total_tax,
-    shipping_addresses: {
-      shipping_method,
-      state,
-      zip
-    },
+    shipping_addresses: { shipping_method, state, zip },
     refunded_amount,
     items_total,
     items_shipped
   } = orderData;
 
-  const productRow = orderData.products.map( (product, i) => {
-    return (
-      <OrderRow key={i} product={product} />
-    )
-  })
+  const productRow = orderData.products.map((product, i) => {
+    return <OrderRow key={i} product={product} />;
+  });
 
   return (
     <div>
@@ -59,24 +52,22 @@ const OrderTable = ({ orderData, originalGrandTotal }) => {
             </td>
             <td colSpan="3" className="">
               <div>Subtotal</div>
-              <div>Coupon Code {coupons ? `(${coupons})`: ''}</div>
+              <div>Coupon Code {coupons ? `(${coupons})` : ''}</div>
               <div>Shipping</div>
               <div>Sales Tax</div>
               <div>Refunded Amount</div>
-              <div className="order-total"><b>GRAND TOTAL</b></div>
+              <div className="order-total">
+                <b>GRAND TOTAL</b>
+              </div>
             </td>
             <td className="order-table-center">
               <div className="clearfix">
                 <span className="float-left order-dollar">$</span>
-                <span className="float-right">
-                  {format(subtotal_ex_tax)}
-                </span>
+                <span className="float-right">{format(subtotal_ex_tax)}</span>
               </div>
               <div className="clearfix">
                 <span className="float-left order-dollar">$</span>
-                <span className="float-right">
-                  {format(coupon_discount)}
-                </span>
+                <span className="float-right">{format(coupon_discount)}</span>
               </div>
               <div className="clearfix">
                 <span className="float-left order-dollar">$</span>
@@ -86,18 +77,16 @@ const OrderTable = ({ orderData, originalGrandTotal }) => {
               </div>
               <div className="clearfix">
                 <span className="float-left order-dollar">$</span>
-                <span className="float-right">
-                  {format(total_tax)}
-                </span>
+                <span className="float-right">{format(total_tax)}</span>
               </div>
               <div className="clearfix">
                 <div className="float-left order-dollar">$</div>
-                <span className="float-right">
-                  {format(refunded_amount)}
-                </span>
+                <span className="float-right">{format(refunded_amount)}</span>
               </div>
               <div className="clearfix order-total">
-                <div className="float-left order-dollar"><b>$</b></div>
+                <div className="float-left order-dollar">
+                  <b>$</b>
+                </div>
                 <span className="float-right">
                   <b>{format(originalGrandTotal)}</b>
                 </span>
@@ -107,7 +96,7 @@ const OrderTable = ({ orderData, originalGrandTotal }) => {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
 export default OrderTable;
