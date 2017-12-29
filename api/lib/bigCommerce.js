@@ -96,7 +96,10 @@ function skuGrabber(i, productArr, callback) {
     // urls for products are stored in a different bc api call
     populateOrder(skuUrl, skuData => {
       // extract sku url
-      productArr[i].url = skuData.data[0].custom_url.url;
+      // there can be an error here with BC assigning the wrong sku to the product
+      if (skuData.data.length > 0) {
+        productArr[i].url = skuData.data[0].custom_url.url;
+      }
 
       // recursively call again
       skuGrabber(i + 1, productArr, callback);
