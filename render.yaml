@@ -1,0 +1,13 @@
+services:
+- type: web
+  name: app-backend
+  env: node
+  rootDir: /
+  buildCommand: yarn
+  startCommand: node api/server
+- type: web
+  name: frontend
+  env: node
+  rootDir: react-ui
+  buildCommand: npm install --only=dev && npm install && npm run build
+  startCommand: npm run start
