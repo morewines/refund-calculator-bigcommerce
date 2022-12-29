@@ -3,9 +3,17 @@ const express = require('express'),
   path = require('path'),
   morgan = require('morgan'),
   bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+var corsOptions = {
+  origin: 'https://refund-calculator-bc.onrender.com',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(corsOptions));
 
 // config
 app.use(morgan('dev'));
