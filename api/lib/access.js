@@ -6,6 +6,8 @@ const accessKey = process.env.ACCESS_KEY;
  * @return {object}             status 200 / 403
  */
 function check(accessValue, callback) {
+  console.warn('accessValue', accessValue)
+  
   if (accessKey !== accessValue) {
     callback(403);
   } else {
