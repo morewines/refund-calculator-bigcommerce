@@ -70,7 +70,13 @@ class Calculator extends Component {
   }
 
   getOrder(searchValue) {
-    SuperAgent.get(`/api/orders/${searchValue}`)
+    const isRender = process.env.RENDER
+
+    console.warn(isRender)
+
+    const url = isRender ? 'https://refund-calculator-bc-api.onrender.com' : 'http://localhost:5000'
+
+    SuperAgent.get(url + `/api/orders/${searchValue}`)
       .query({ accessValue: this.props.accessValue })
       .end((err, res) => {
         if (err || !res.ok) {
