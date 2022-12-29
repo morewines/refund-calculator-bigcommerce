@@ -25,6 +25,9 @@ function findOrder(orderID, callback) {
 
   // send request to bc orders api
   request(options, (err, res, body) => {
+    console.warn('err', err)
+    console.warn('res inside findOrder', res)
+    
     if (res.statusCode !== 200) {
       callback(res.statusCode);
     }
