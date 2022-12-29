@@ -70,7 +70,7 @@ class Calculator extends Component {
   }
 
   getOrder(searchValue) {
-    const isRender = process.env.RENDER
+    const isRender = process.env.REACT_APP_RENDER
 
     console.warn(isRender)
 
