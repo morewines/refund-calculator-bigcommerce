@@ -16,6 +16,8 @@ router.get('/:orderID', (req, res, next) => {
 
   // check if client has correct access code
   access.check(accessValue, status => {
+    console.warn('status', status)
+    
     if (status !== 200) {
       res.json(403);
     } else {
