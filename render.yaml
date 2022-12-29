@@ -2,9 +2,9 @@ services:
 - type: web
   name: app-backend
   env: node
-  rootDir: /
+  rootDir: api
   buildCommand: yarn
-  startCommand: node api/server
+  startCommand: node server
 - type: web
   name: frontend
   env: node
