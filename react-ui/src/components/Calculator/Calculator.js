@@ -333,9 +333,9 @@ class Calculator extends Component {
       : format(coupon_discount);
 
     //if sales tax exists, calculate it dynamically, else display existing bc api data
-    //can reuse coupontotal helper, just passing in 8% for tax
+    //can reuse coupontotal helper, just passing in 8.75% for tax
     let editSalesTax = +total_tax
-      ? coupontotal(editSubTotal - editCouponTotal, 8)
+      ? coupontotal(editSubTotal - editCouponTotal, 8.75)
       : format(total_tax);
     let editGrandTotal = format(
       +editSubTotal - +editCouponTotal + +editSalesTax + +shipping_cost_inc_tax
